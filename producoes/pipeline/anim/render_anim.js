@@ -14,6 +14,7 @@ const fs = require('fs');
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => Promise.all([...document.fonts].map(f => f.load())));
   for (const j of jobs) {
+    const w = j.w || 1920, h = j.h || 1080; await page.setViewportSize({ width: w, height: h }); await page.evaluate(([w, h]) => window.tamanho(w, h), [w, h]);
     if (fs.existsSync(j.saida) && fs.existsSync(j.saida + '.key') && fs.readFileSync(j.saida + '.key', 'utf8') === JSON.stringify(j)) continue;
     const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', '30', '-i', '-',
       '-c:v', 'libx264', '-preset', 'fast', '-crf', '17', '-pix_fmt', 'yuv420p', j.saida]);

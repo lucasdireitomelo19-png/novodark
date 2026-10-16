@@ -9,6 +9,8 @@ O pipeline foi adaptado do canal *Lado Sombrio do Universo* (repo `edittest`): m
 | # | Caso | Documento de produção | Arquivo final |
 |---|---|---|---|
 | 01 | As máscaras de chumbo (Niterói, 1966) | [01_mascaras_de_chumbo.md](01_mascaras_de_chumbo.md) | `mascaras_de_chumbo_10min.mp4` |
+| 02 | Operação Prato (Colares, 1977) | [02_operacao_prato.md](02_operacao_prato.md) | `operacao_prato_10min.mp4` |
+| S1–S9 | Shorts de temas variados | [shorts_lote1.md](shorts_lote1.md) | `videos/s*/s*.mp4` |
 
 Os MP4 não ficam no git (são grandes). Eles são regerados pelo processo abaixo.
 
@@ -28,9 +30,20 @@ SSL_CERT_FILE=/root/.ccr/ca-bundle.crt python3 narrar.py ../videos/v2_tema 592.5
 CHECK=1 python3 motor_h.py ../videos/v2_tema     # confere tempos de cada plano
 WORKERS=4 python3 motor_h.py ../videos/v2_tema   # gera o MP4 de 600,0 s
 
-# 4. Thumbnails A/B
+# 4. Thumbnails A/B (configuradas em ../videos/v2_tema/thumbs.json)
 NODE_PATH=$(npm root -g) node anim/thumb.js ../videos/v2_tema
 ```
+
+### Shorts (1080x1920, 61 s)
+
+O mesmo motor faz os Shorts. O `cenas.py` começa com `from comum_shorts import *` (liga `VERTICAL`, `FIM = 61.0` e os atalhos `A()` e `T()`). Todas as animações se adaptam sozinhas ao formato vertical.
+
+```bash
+SSL_CERT_FILE=/root/.ccr/ca-bundle.crt python3 narrar.py ../videos/s10_tema 59.4 0
+WORKERS=4 python3 motor_h.py ../videos/s10_tema
+```
+
+O cache de animações (`videos/*/tmp`) usa os parâmetros da cena como chave. Se você mudar o desenho em `anim.html`, apague a pasta `tmp` do vídeo antes de renderizar de novo.
 
 ## Animações disponíveis (`pipeline/anim/anim.html`)
 
@@ -49,6 +62,17 @@ NODE_PATH=$(npm root -g) node anim/thumb.js ../videos/v2_tema
 | `jornal` | `titulo` | Capa de jornal recriada |
 | `teoria` | `icone` (`ovni`, `capsula`, `crime`), `num`, `titulo` | Cartões de teoria |
 | `rua`, `estrada`, `eletronica`, `dinheiro`, `final` | variados | Ambientação |
+| `brasil` | `pin=[lon, lat]`, `nome`, `zoom`, `legenda` | Mapa do Brasil com marcador |
+| `radar` | `n`, `legenda` | Tela de radar com alvos |
+| `cacas` | `luzes` | Caças cruzando o céu com luzes |
+| `vila` | `feixe`, `fogueira` | Vila ribeirinha à noite, feixe de luz descendo |
+| `ilha`, `cobra` | `farol`, `tarde`, `legenda` | Ilha no mar, serpente (ilustração) |
+| `fordlandia` | `ruina`, `noite`, `legenda` | Cidade industrial na floresta |
+| `meteoro`, `pedra` | `fogo`, `texto` | Bola de fogo; meteorito em close |
+| `cranio`, `museu` | `scan`, `rachado`, `fogo`, `texto`, `legenda` | Crânio (ilustração); prédio em chamas |
+| `praia`, `fragmentos` | `explosao`, `fragmentos`, `texto` | Praia à noite com explosão; pedaços de metal |
+| `criatura` | `mostrar` | Vulto agachado com olhos vermelhos, na chuva |
+| `fotos` | `n`, `seed`, `legenda` | Fotos recriadas espalhadas na mesa |
 
 Para um caso novo, acrescente cenas ao `anim.html` no mesmo padrão `draw(t, dur, p)` e registre no objeto `CENAS`.
 
