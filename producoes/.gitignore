@@ -1,0 +1,6 @@
+pipeline/src/
+videos/*/tmp/
+videos/*/log.txt
+*.mp4
+__pycache__/
+videos/*/__pycache__/
