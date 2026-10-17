@@ -1,6 +1,6 @@
 from comum_shorts import *
 SAIDA = "s10_escolta.mp4"
-FIM = 65.0
+FIM = 67.0
 FINAL = "INQUÉRITO SOMBRIO"
 CREDITO_ANIM = "Ilustração: Inquérito Sombrio"
 B = dict(tag="banco", fit=0, noite=1)  # footage do Pixabay em tela cheia, virada em noite

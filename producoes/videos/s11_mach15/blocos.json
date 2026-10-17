@@ -1,0 +1,56 @@
+[
+ {
+  "id": "c01",
+  "texto": "Dezoito mil quilômetros por hora. Foi o que um piloto da Força Aérea calculou para algo que ele nunca conseguiu ver.",
+  "pausa": 0.3,
+  "vel": -4,
+  "tom": -1
+ },
+ {
+  "id": "c02",
+  "texto": "Nessa velocidade, você vai do Rio a São Paulo em pouco mais de um minuto.",
+  "pausa": 0.4,
+  "vel": -2
+ },
+ {
+  "id": "c03",
+  "texto": "Dezenove de maio de mil novecentos e oitenta e seis. Perto das onze da noite, o capitão Armindo Viriato decola de Anápolis, em Goiás, num caça Mirage.",
+  "pausa": 0.35
+ },
+ {
+  "id": "c04",
+  "texto": "O radar de bordo encontra um alvo. Ele vai atrás. O alvo faz zigue-zague na tela. Mas, lá fora, nada. Nenhuma luz.",
+  "pausa": 0.35,
+  "vel": 4
+ },
+ {
+  "id": "c05",
+  "texto": "Quando ele chega perto, o alvo acelera de forma brusca. E some da tela.",
+  "pausa": 0.5,
+  "vel": 5
+ },
+ {
+  "id": "c06",
+  "texto": "Pelos cálculos do piloto, o objeto chegou a Mach quinze. Quinze vezes a velocidade do som. Quase sete vezes mais rápido que o próprio Mirage.",
+  "pausa": 0.35,
+  "vel": -2
+ },
+ {
+  "id": "c07",
+  "texto": "Anos depois, numa entrevista à TV, ele disse: \"Se existe avião que possa desenvolver essa velocidade, eu desconheço.\"",
+  "pausa": 0.35,
+  "vel": -3
+ },
+ {
+  "id": "c08",
+  "texto": "Até o relatório oficial da Aeronáutica registrou acelerações súbitas e curvas de noventa graus.",
+  "pausa": 0.4
+ },
+ {
+  "id": "c09",
+  "texto": "Então me diz: o que voa a dezoito mil quilômetros por hora?",
+  "pausa": 0,
+  "vel": -5,
+  "tom": -1
+ }
+]

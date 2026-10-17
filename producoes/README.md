@@ -44,7 +44,13 @@ SSL_CERT_FILE=/root/.ccr/ca-bundle.crt python3 narrar.py ../videos/s10_tema 59.4
 WORKERS=4 python3 motor_h.py ../videos/s10_tema
 ```
 
-### Narração com ElevenLabs e footage do Pixabay (desde o s10)
+### Narração frase a frase e footage do Pixabay (desde o s10)
+
+Padrão do canal: voz Antonio com `narrar_antonio.py` (grátis). Ele gera cada frase separada, corta o silêncio das pontas e desenha as pausas pela pontuação; `vel`/`tom` por bloco no `blocos.json` dão variação (gancho mais lento, perseguição mais rápida). O `narrar_eleven.py` lê o mesmo `blocos.json`, para quando houver créditos do ElevenLabs.
+
+```bash
+SSL_CERT_FILE=/root/.ccr/ca-bundle.crt ../../.venv/bin/python narrar_antonio.py ../videos/s11_mach15 10 -2
+```
 
 Chaves ficam em `.env` na raiz do repositório (ignorado pelo git): `ELEVENLABS_API_KEY`, `PIXABAY_API_KEY`. Pacotes Python ficam em `.venv` (`edge-tts`, `faster-whisper`, `numpy`, `scipy`).
 

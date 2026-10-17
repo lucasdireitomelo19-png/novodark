@@ -14,7 +14,7 @@ Autores e páginas: `producoes/banco_creditos.json`. Os caças do footage não s
 Radar de bordo, luz vermelha, mapa, cartões, documento e citações: animações próprias (`pipeline/anim/anim.html`), com etiquetas RECRIAÇÃO / ILUSTRAÇÃO.
 
 ## Áudio
-- Narração: voz sintética ElevenLabs (Brian, eleven_multilingual_v2). Marcar "conteúdo alterado ou sintético" no upload se a plataforma pedir.
+- Narração: voz sintética Microsoft Edge TTS (pt-BR-AntonioNeural), gerada frase a frase (`narrar_antonio.py`). Marcar "conteúdo alterado ou sintético" no upload se a plataforma pedir.
 - Trilha e SFX: gerados pelo próprio pipeline (`pipeline/sfx.py`), sem licença de terceiros.
 
 ## Fontes do roteiro

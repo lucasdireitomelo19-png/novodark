@@ -2,12 +2,15 @@
  {
   "id": "c01",
   "texto": "Cada ponto nesse radar é um objeto que a Força Aérea Brasileira nunca identificou.",
-  "pausa": 0.25
+  "pausa": 0.25,
+  "vel": -4,
+  "tom": -1
  },
  {
   "id": "c02",
   "texto": "E, naquela noite, eles estavam atrás de um caça.",
-  "pausa": 0.35
+  "pausa": 0.35,
+  "vel": -3
  },
  {
   "id": "c03",
@@ -28,21 +31,26 @@
  {
   "id": "c04b",
   "texto": "Seis horas: logo atrás dele. Treze contatos. Sete de um lado, seis do outro. Como uma escolta.",
-  "pausa": 0.35
+  "pausa": 0.35,
+  "vel": 3
  },
  {
   "id": "c05",
   "texto": "O capitão faz uma curva de cento e oitenta graus para encarar quem o seguia. E não encontra nada. Nem no céu, nem no radar.",
-  "pausa": 0.5
+  "pausa": 0.5,
+  "vel": 4
  },
  {
   "id": "c06",
   "texto": "Quatro dias depois, o ministro da Aeronáutica admitiu à imprensa: \"Tecnicamente, diria aos senhores que não temos explicação.\" Em dois mil e nove, o relatório oficial concluiu que os objetos eram sólidos e refletiam, de certa forma, inteligência.",
-  "pausa": 0.5
+  "pausa": 0.5,
+  "vel": -2
  },
  {
   "id": "c07",
   "texto": "Se fosse você naquele caça... você teria feito a curva?",
-  "pausa": 0
+  "pausa": 0,
+  "vel": -6,
+  "tom": -1
  }
 ]

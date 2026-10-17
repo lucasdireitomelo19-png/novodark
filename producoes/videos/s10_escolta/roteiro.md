@@ -1,10 +1,10 @@
 # S10 · A escolta de 13 objetos (Noite Oficial dos OVNIs, 1986)
 
-Short 9:16 · ~59 s · voz pt-BR-AntonioNeural · ~170 palavras · visual misto (Pixabay + animações do canal)
+Short 9:16 · 67 s · voz pt-BR-AntonioNeural (narrar_antonio.py) · 162 palavras · visual misto (Pixabay + animações do canal)
 
 Ângulo novo (o s3 contou a noite inteira): um único caça, o F-5 do capitão Jordão, e os 13 contatos de radar que apareceram atrás dele.
 
-## Narração final (ElevenLabs, voz Brian, multilingual v2, velocidade 1,15 · 62,9 s)
+## Narração final (Antonio, edge-tts, frase a frase, +10% / -2 Hz, ajustes por bloco · 65,3 s)
 
 Gancho escolhido: opção D ("Cada ponto nesse radar..."). Blocos em `blocos.json`; a fala do controle (`c04r`) passa por filtro de rádio.
 
