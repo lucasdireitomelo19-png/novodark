@@ -184,6 +184,9 @@ for i, c in enumerate(CENAS):
     if banco:
         f.append(f"setsar=1,fps={FPS},eq=contrast=1.12:brightness=-0.07:saturation={c.get('sat', 0.72)}:gamma=0.92,"
                  "colorbalance=rs=-0.05:bs=0.08:rh=0.06:bh=-0.04")
+        if c.get("noite"):  # "noite americana": footage de dia vira noite (escuro, azulado, dessaturado)
+            f.append("eq=brightness=-0.04:gamma=0.85:saturation=0.5,colorbalance=rs=-0.1:gs=-0.03:bs=0.18:rm=-0.06:bm=0.1,"
+                     "curves=all='0/0 0.5/0.38 1/0.85'")
     else:
         f.append(f"setsar=1,fps={FPS}" + ("" if anim else f",eq=contrast=1.06:saturation={c.get('sat', 1.12)}"))
     if c.get("flash"):
@@ -213,7 +216,7 @@ grupos, atual = [], []
 for k, p in enumerate(palavras):
     atual.append(p)
     prox = palavras[k + 1] if k + 1 < len(palavras) else None
-    pausa = prox is None or prox["t"] - (p["t"] + p["d"]) > 0.25
+    pausa = prox is None or prox["t"] - (p["t"] + p["d"]) > 0.25 or p.get("fim")
     longo = prox is not None and sum(len(x["w"]) + 1 for x in atual) + len(prox["w"]) > (22 if VERT else 38)
     if pausa or longo or len(atual) >= (4 if VERT else 7):
         grupos.append(atual); atual = []
@@ -370,7 +373,7 @@ run(["ffmpeg", "-v", "error", "-y", "-i", bruto, "-i", os.path.join(pasta, "narr
      "[voz][bg]amix=inputs=2:normalize=0:duration=first,"
      f"loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=disabled[a];"
      f"[0:v]vignette=angle=0.5,noise=alls=4:allf=t,ass={ass_path}:fontsdir={FONTS},"
-     f"fade=t=in:d=0.4,fade=t=out:st={FIM - 1.0}:d=1.0,trim=0:{FIM}[v]",
+     + ("" if VERT else "fade=t=in:d=0.4,") + f"fade=t=out:st={FIM - 1.0}:d=1.0,trim=0:{FIM}[v]",
      "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
      "-r", str(FPS), "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-t", f"{FIM}",
      "-movflags", "+faststart", saida])

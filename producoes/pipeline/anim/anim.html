@@ -612,9 +612,62 @@ function fotos(t, dur, p) {
   vinheta(0.8); grao(t, 0.06);
 }
 
+// ---------- radar de cabine com contatos atrás do caça (Noite Oficial dos OVNIs) ----------
+// p: n (contatos, padrão 13: 7 à esquerda e 6 à direita), de (s em que começam a surgir), passo (s entre eles),
+//    vazio (sem contatos), rotulos (mostra 7 | 6), legenda
+function escolta(t, dur, p) {
+  fundo('#0b0303', '#000'); const cx = W / 2, cy = H * 0.5, R = Math.min(W, H) * 0.46, COR = '255,70,50';
+  ctx.strokeStyle = `rgba(${COR},.28)`; ctx.lineWidth = 2;
+  for (let k = 1; k <= 4; k++) { ctx.beginPath(); ctx.arc(cx, cy, R * k / 4, 0, 6.283); ctx.stroke(); }
+  for (let k = 0; k < 72; k++) { const a = k / 72 * 6.283, l = k % 6 ? 10 : 24; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); ctx.lineTo(cx + Math.cos(a) * (R - l), cy + Math.sin(a) * (R - l)); ctx.stroke(); }
+  ctx.setLineDash([8, 10]); ctx.beginPath(); ctx.moveTo(cx, cy - R); ctx.lineTo(cx, cy + R); ctx.moveTo(cx - R, cy); ctx.lineTo(cx + R, cy); ctx.stroke(); ctx.setLineDash([]);
+  const ang = t * 2.4 - Math.PI / 2; ctx.save(); ctx.translate(cx, cy);
+  for (let i = 0; i < 46; i++) { ctx.fillStyle = `rgba(${COR},${0.2 * (1 - i / 46)})`; ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, ang - (i + 1) * 0.022, ang - i * 0.022); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
+  // o caça no centro, apontando para cima
+  ctx.save(); ctx.translate(cx, cy); ctx.fillStyle = '#ffd9c8'; ctx.shadowColor = `rgba(${COR},1)`; ctx.shadowBlur = 20;
+  ctx.beginPath(); ctx.moveTo(0, -30); ctx.lineTo(20, 22); ctx.lineTo(0, 12); ctx.lineTo(-20, 22); ctx.closePath(); ctx.fill(); ctx.restore();
+  texto('F-5', cx + 44, cy + 4, 26, '#ffd9c8', 'MX', 'left', 0.8, 3);
+  if (!p.vazio) {
+    const n = p.n ?? 13, de = p.de ?? 0, passo = p.passo ?? 0.12;
+    for (let i = 0; i < n; i++) {
+      const lado = i < Math.ceil(n * 7 / 13) ? -1 : 1, k = lado < 0 ? i : i - Math.ceil(n * 7 / 13);
+      const d = R * (0.22 + k * 0.1), a = Math.PI / 2 + lado * (0.32 + (k % 2) * 0.12);
+      const bx = cx + Math.cos(a) * d + Math.sin(t * 1.3 + i) * 6, by = cy + Math.sin(a) * d + Math.cos(t * 1.1 + i) * 6;
+      const ap = ease((t - de - i * passo) / 0.15); if (ap <= 0) continue;
+      const ab = Math.atan2(by - cy, bx - cx), dif = ((ang - ab) % 6.283 + 6.283) % 6.283, br = Math.exp(-dif * 1.1);
+      const pulso = t - de - i * passo; if (pulso < 0.6) { ctx.strokeStyle = `rgba(${COR},${0.9 * (1 - pulso / 0.6)})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(bx, by, 10 + pulso * 70, 0, 6.283); ctx.stroke(); }
+      ctx.fillStyle = `rgba(255,${130 + br * 110},${100 + br * 90},${ap * (0.7 + br * 0.3)})`; ctx.shadowColor = `rgba(${COR},1)`; ctx.shadowBlur = 16; ctx.beginPath(); ctx.arc(bx, by, 13 + br * 8, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
+    }
+    if (p.rotulos) { const a = ease((t - de - n * passo) / 0.4); texto('7', cx - R * 0.55, cy + R * 0.62, 120, '#fff', 'MX', 'center', a); texto('6', cx + R * 0.55, cy + R * 0.62, 120, '#fff', 'MX', 'center', a); }
+  }
+  texto('RADAR DE BORDO · RECRIAÇÃO', cx, cy - R - 40, 24, `rgba(${COR},.7)`, 'MM', 'center', 1, 5);
+  if (p.legenda) texto(p.legenda, W / 2, VERT() ? H * 0.12 : 70, 52, '#ffb0a0', 'MX', 'center', fade(t, dur), 8);
+  vinheta(0.8); grao(t, 0.05);
+}
+
+// ---------- luz vermelha no céu noturno, vista da cabine ----------
+// p: apaga (s em que a luz some; sem ele, fica acesa)
+function luz(t, dur, p) {
+  fundo('#03050b', '#0a0f1c'); estrelas(t, 0.45, H);
+  const r = rng(77); ctx.fillStyle = 'rgba(25,32,52,.55)';
+  for (let i = 0; i < 9; i++) { const x = ((r() * W * 1.6 - t * (60 + r() * 60)) % (W * 1.6) + W * 1.6) % (W * 1.6) - W * 0.3, y = H * (0.2 + r() * 0.7); ctx.beginPath(); ctx.ellipse(x, y, 340 + r() * 300, 50 + r() * 50, 0, 0, 6.283); ctx.fill(); }
+  const x = W * 0.55 + Math.sin(t * 0.9) * 18, y = H * 0.4 + Math.cos(t * 0.7) * 10;
+  let k = 1; if (p.apaga != null) k = t < p.apaga ? 1 : Math.max(0, 1 - (t - p.apaga) / 0.08);
+  const pul = 0.85 + 0.15 * Math.sin(t * 9);
+  if (k > 0) { ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 260 * pul); g.addColorStop(0, `rgba(255,235,225,${k})`); g.addColorStop(0.08, `rgba(255,70,40,${0.95 * k})`); g.addColorStop(0.35, `rgba(220,20,10,${0.35 * k})`); g.addColorStop(1, 'rgba(120,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - 300, y - 300, 600, 600); ctx.restore(); }
+  // arco da canopy (fino, no canto) e painel escuro embaixo
+  ctx.strokeStyle = '#010102'; ctx.lineWidth = Math.min(W, H) * 0.035; ctx.beginPath(); ctx.moveTo(-40, H * 0.75); ctx.quadraticCurveTo(W * 0.05, H * 0.05, W * 0.45, -40); ctx.stroke();
+  ctx.fillStyle = '#010102'; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, H * 0.86); ctx.quadraticCurveTo(W * 0.5, H * 0.8, W, H * 0.86); ctx.lineTo(W, H); ctx.fill();
+  for (let i = 0; i < 5; i++) { ctx.fillStyle = `rgba(255,140,60,${0.25 + 0.2 * Math.sin(t * 3 + i)})`; ctx.fillRect(W * (0.2 + i * 0.14), H * 0.9, 18, 8); }
+  vinheta(0.9); grao(t, 0.06);
+}
+
 window.tamanho = (w, h) => { W = w; H = h; cv.width = w; cv.height = h; };
 const CENAS = { morro, mascara, bilhete, caderno, mapa, relogio, data: data_, capitulo, citacao, ficha, documento, jornal, perguntas, teoria, rua, estrada, eletronica, dinheiro, final: final_,
-  brasil, radar, cacas, vila, ilha, cobra, fordlandia, meteoro, pedra, cranio, museu, praia, fragmentos, criatura, fotos };
+  brasil, radar, cacas, vila, ilha, cobra, fordlandia, meteoro, pedra, cranio, museu, praia, fragmentos, criatura, fotos, escolta, luz };
 window.desenhar = (nome, t, dur, p) => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.lineCap = 'butt'; ctx.setLineDash([]); CENAS[nome](t, dur, p || {}); };
 </script>
 </body></html>

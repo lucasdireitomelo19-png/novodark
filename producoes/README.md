@@ -11,6 +11,7 @@ O pipeline foi adaptado do canal *Lado Sombrio do Universo* (repo `edittest`): m
 | 01 | As máscaras de chumbo (Niterói, 1966) | [01_mascaras_de_chumbo.md](01_mascaras_de_chumbo.md) | `mascaras_de_chumbo_10min.mp4` |
 | 02 | Operação Prato (Colares, 1977) | [02_operacao_prato.md](02_operacao_prato.md) | `operacao_prato_10min.mp4` |
 | S1–S9 | Shorts de temas variados | [shorts_lote1.md](shorts_lote1.md) | `videos/s*/s*.mp4` |
+| S10 | A escolta de 13 objetos (FAB, 1986) | [videos/s10_escolta/roteiro.md](videos/s10_escolta/roteiro.md) | `videos/s10_escolta/s10_escolta.mp4` |
 
 Os MP4 não ficam no git (são grandes). Eles são regerados pelo processo abaixo.
 
@@ -42,6 +43,24 @@ O mesmo motor faz os Shorts. O `cenas.py` começa com `from comum_shorts import 
 SSL_CERT_FILE=/root/.ccr/ca-bundle.crt python3 narrar.py ../videos/s10_tema 59.4 0
 WORKERS=4 python3 motor_h.py ../videos/s10_tema
 ```
+
+### Narração com ElevenLabs e footage do Pixabay (desde o s10)
+
+Chaves ficam em `.env` na raiz do repositório (ignorado pelo git): `ELEVENLABS_API_KEY`, `PIXABAY_API_KEY`. Pacotes Python ficam em `.venv` (`edge-tts`, `faster-whisper`, `numpy`, `scipy`).
+
+```bash
+set -a; . ../../.env; set +a
+# narração por blocos (blocos.json), com cache por bloco e tempos palavra a palavra; trocas.json vira números na legenda
+../../.venv/bin/python narrar_eleven.py ../videos/s10_escolta 1.15
+# footage
+python3 pixabay.py videos "fighter jet" 8
+python3 pixabay.py baixar_video 284488 b_s10_caca_nuvens.mp4
+# render e capas verticais A/B
+WORKERS=4 ../../.venv/bin/python motor_h.py ../videos/s10_escolta
+NODE_PATH=$(npm root -g) node anim/capa_short.js ../videos/s10_escolta
+```
+
+Novidades do motor: opção `noite=1` (footage de dia vira noite), legenda quebra no fim de frase. Novas cenas: `escolta` (radar de bordo com contatos atrás do caça) e `luz` (luz vermelha vista da cabine, `apaga`).
 
 O cache de animações (`videos/*/tmp`) usa os parâmetros da cena como chave. Se você mudar o desenho em `anim.html`, apague a pasta `tmp` do vídeo antes de renderizar de novo.
 
