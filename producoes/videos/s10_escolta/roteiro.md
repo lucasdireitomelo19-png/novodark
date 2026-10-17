@@ -4,45 +4,48 @@ Short 9:16 · ~59 s · voz pt-BR-AntonioNeural · ~170 palavras · visual misto 
 
 Ângulo novo (o s3 contou a noite inteira): um único caça, o F-5 do capitão Jordão, e os 13 contatos de radar que apareceram atrás dele.
 
-## CENA 01 — 00:00–00:03 · GANCHO
-NARRAÇÃO: "Treze objetos. Em formação. Atrás de um caça da Força Aérea Brasileira."
-VISUAL: anim `radar` com 13 alvos surgindo atrás de um ponto central → punch-in 110%
-TEXTO NA TELA: "13" (enorme, entra com impacto)
-SOM: bip de radar + impact grave
+## CENA 01 — 00:00–00:04 · GANCHO (cold open no clímax)
+NARRAÇÃO: (voz de rádio, chiado) "Numerosos tráfegos às seis horas da sua aeronave." / (narrador) "Às seis horas quer dizer: logo atrás de você."
+VISUAL: frame 0 já é o radar de cabine, vermelho, com pontos surgindo ATRÁS do caça → punch-in 112% no último ponto
+TEXTO NA TELA: legenda do rádio em fonte de terminal; "ATRÁS DE VOCÊ" (impacto)
+SOM: chiado de rádio, bip de radar acelerando, impact grave no "atrás"
 
-## CENA 02 — 00:03–00:15 · APOSTA
-NARRAÇÃO: "Dezenove de maio de 1986. Às dez e cinquenta da noite, o capitão Márcio Jordão decola da base de Santa Cruz, no Rio, num caça F-5. A missão: interceptar luzes que os radares seguiam havia horas."
-VISUAL: card `data` "19 DE MAIO DE 1986 · 22h50" → footage Pixabay de jato/pista à noite (tratamento frio, grão) → `brasil` com pin em Santa Cruz (RJ)
-SOM: turbina de jato, riser leve
+## CENA 02 — 00:04–00:08 · APOSTA
+NARRAÇÃO: "O piloto era da Força Aérea Brasileira. E no radar havia treze objetos."
+VISUAL: radar congela com 13 alvos (freeze + flash) → contador "13"
+TEXTO NA TELA: "13"
+SOM: silêncio de meio segundo antes do "treze", depois drone grave
 
-## CENA 03 — 00:15–00:27 · PRIMEIRO CONTATO
-NARRAÇÃO: "Ele vê uma luz vermelha, muito forte. O radar também vê. E, de repente, a luz se apaga. Some do radar."
-VISUAL: footage Pixabay céu noturno/nuvens de cabine → luz vermelha (overlay) → corte para `radar` vazio
-TEXTO NA TELA: "CONTATO PERDIDO"
-SOM: música cai, silêncio de 0,5 s no "some"
+## CENA 03 — 00:08–00:22 · REWIND
+NARRAÇÃO: "Minutos antes, o capitão Márcio Jordão tinha decolado da base de Santa Cruz, no Rio, num caça F-5. Era 19 de maio de 1986. A missão: interceptar luzes que os radares seguiam havia horas. Ele vê uma luz vermelha, muito forte. O radar também vê. E, de repente, ela se apaga."
+VISUAL: rewind glitch (VHS) → card `data` "19 DE MAIO DE 1986 · 22h50" → footage Pixabay jato/pista à noite (frio, grão) → `brasil` pin Santa Cruz (RJ) → céu noturno + luz vermelha (overlay) → corte seco para preto
+TEXTO NA TELA: "MINUTOS ANTES"
+SOM: rewind, turbina, riser; corte de som no "apaga"
 
-## CENA 04 — 00:27–00:38 · A VIRADA
-NARRAÇÃO: "Então o controle avisa: há tráfego atrás dele. Treze contatos. Sete de um lado, seis do outro. Como uma escolta."
-VISUAL: `radar` com 7 + 6 alvos flanqueando o caça (freeze + zoom) → `cacas` com luzes atrás
-TEXTO NA TELA: "7" | "6" de cada lado → "ESCOLTA?"
-SOM: rádio chiado, bips acelerando, riser
+## CENA 04 — 00:22–00:30 · A ESCOLTA
+NARRAÇÃO: "É aí que o controle chama no rádio. Sete objetos de um lado, seis do outro. Como uma escolta."
+VISUAL: `radar` com 7 + 6 alvos flanqueando o caça → `cacas` com luzes atrás
+TEXTO NA TELA: "7" | "6" → "ESCOLTA?"
+SOM: chiado de rádio, bips, riser
 
-## CENA 05 — 00:38–00:45 · O CONFRONTO
+## CENA 05 — 00:30–00:38 · O CONFRONTO
 NARRAÇÃO: "O capitão faz uma curva de cento e oitenta graus para encarar quem estava atrás. E não encontra nada. Nem no céu, nem no radar."
 VISUAL: whip pan/blur na curva → footage céu vazio → `radar` limpo
 SOM: whoosh na curva, depois só vento
 
-## CENA 06 — 00:45–00:53 · PAYOFF OFICIAL
+## CENA 06 — 00:38–00:51 · PAYOFF OFICIAL
 NARRAÇÃO: "Quatro dias depois, o ministro da Aeronáutica chamou a imprensa e disse: 'Tecnicamente, diria aos senhores que não temos explicação.' Em 2009, o relatório oficial concluiu que os objetos eram sólidos e refletiam, de certa forma, inteligência."
 VISUAL: `citacao` com a frase do ministro → `documento` RECRIAÇÃO "COMDA · 2 JUN 1986" com carimbo e a frase do relatório
 SOM: máquina de escrever, carimbo (impact)
 
-## CENA 07 — 00:53–00:59 · LOOP / COMENTÁRIO
+## CENA 07 — 00:51–00:59 · LOOP / COMENTÁRIO
 NARRAÇÃO: "Se fosse você naquele caça… você teria feito a curva?"
 VISUAL: volta ao `radar` com os 13 alvos (fecha o loop com a cena 01) → final INQUÉRITO SOMBRIO
 SOM: bip único, corte seco
 
 ## Checagem de fatos
+- "Numerosos tráfegos a seis horas de sua aeronave": aviso do controlador (sargento Nelson) ao capitão Jordão ✔ (CB). Na narração vira "às seis horas", forma usual no rádio
+- "Minutos antes": decolagem 22h50, curva de 180° às 22h59 ✔ (CB); o horário exato do aviso não é citado
 - 19/05/1986, F-5 de Santa Cruz (RJ) decolou às 22h50 com o capitão Márcio Brisolla Jordão ✔ (CB; Wikipedia: F-5E "JB07", 22h50)
 - Contato visual e de radar com luz vermelha forte, que "apagou" e sumiu do radar ✔ (Wikipedia)
 - 13 contatos atrás do caça, 7 de um lado e 6 do outro; curva de 180° sem achar nada ✔ (CB; Wikipedia)
