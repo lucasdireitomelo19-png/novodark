@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:"MX";src:url("Montserrat-ExtraBold.ttf")}
+  @font-face{font-family:"MM";src:url("Montserrat-Medium.ttf")}
+  @font-face{font-family:"MAO";src:url("Caveat.ttf")}
+  @font-face{font-family:"MAQ";src:url("SpecialElite.ttf")}
+  html,body{margin:0;background:#000}
+  #capa{position:relative;width:2560px;height:1440px;overflow:hidden;
+        background:radial-gradient(ellipse 900px 600px at 1700px 720px,#3a0a0d 0%,#140405 45%,#050203 75%,#000 100%)}
+  #grao{position:absolute;inset:0;opacity:.08}
+  #neblina{position:absolute;inset:0;background:
+     radial-gradient(ellipse 1400px 260px at 1300px 1150px,rgba(140,150,170,.10),transparent 70%),
+     radial-gradient(ellipse 1200px 220px at 900px 300px,rgba(140,150,170,.06),transparent 70%)}
+  /* papéis do inquérito à direita */
+  .papel{position:absolute;background:#e3d9bf;box-shadow:0 30px 60px rgba(0,0,0,.85);
+         background-image:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(90,60,20,.35) 100%)}
+  #ficha{left:1430px;top:470px;width:520px;height:330px;transform:rotate(-7deg)}
+  #ficha .t{font-family:"MAQ";font-size:30px;color:#1d1d1d;position:absolute;left:36px}
+  #bilhete{left:1640px;top:770px;width:400px;height:250px;transform:rotate(5deg);
+           background-color:#ece4cc;background-image:repeating-linear-gradient(transparent 0 52px,rgba(70,110,170,.35) 52px 54px)}
+  #bilhete .m{font-family:"MAO";font-size:52px;color:#1d2a4a;position:absolute;left:40px}
+  #foto{position:absolute;left:1700px;top:300px;width:300px;height:340px;transform:rotate(4deg);background:#ece8dc;box-shadow:0 30px 60px rgba(0,0,0,.9)}
+  #foto .img{position:absolute;left:18px;top:18px;width:264px;height:250px;
+             background:radial-gradient(circle at 60% 30%,rgba(255,160,70,.9) 0 10px,rgba(255,110,30,.35) 11px 40px,transparent 70px),
+                        linear-gradient(#0b1020,#1a2236 70%,#05070c 71%)}
+  #foto .leg{position:absolute;left:20px;bottom:18px;font-family:"MAO";font-size:34px;color:#333}
+  #carimbo{position:absolute;left:1500px;top:590px;transform:rotate(-14deg);z-index:2;border:7px solid #e0262b;color:#e0262b;
+           font-family:"MX";font-size:46px;letter-spacing:6px;padding:8px 24px;opacity:.92;background:rgba(10,4,4,.35)}
+  #lupa{position:absolute;z-index:3;left:1810px;top:380px;width:700px;height:700px;
+        filter:drop-shadow(0 30px 40px rgba(0,0,0,.8))}
+  #vinheta{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.75) 32%,rgba(0,0,0,0) 55%),
+           radial-gradient(ellipse at 60% 50%,transparent 45%,rgba(0,0,0,.7) 100%)}
+  /* área segura do YouTube: 1546 x 423 centralizada (x 507, y 508) */
+  #seguro{position:absolute;left:507px;top:508px;width:1546px;height:423px;display:flex;flex-direction:column;justify-content:center;padding-left:40px;box-sizing:border-box}
+  .tag{font-family:"MAQ";font-size:34px;color:#ffb347;letter-spacing:6px;margin-bottom:10px}
+  .l1{font-family:"MX";color:#fff;font-size:132px;line-height:.95;letter-spacing:3px;text-shadow:0 6px 20px rgba(0,0,0,.9)}
+  .l2{font-family:"MX";color:#e0262b;font-size:132px;line-height:.95;letter-spacing:3px;text-shadow:0 0 40px rgba(224,38,43,.45),0 6px 20px rgba(0,0,0,.9)}
+  .barra{width:140px;height:7px;background:#e0262b;margin:28px 0 22px;box-shadow:0 0 18px #e0262b}
+  .slogan{font-family:"MM";color:#e9e1d8;font-size:42px;letter-spacing:1px}
+  .slogan b{font-family:"MX";color:#fff}
+  #guias{position:absolute;left:507px;top:508px;width:1546px;height:423px;outline:4px dashed #0f0;display:none}
+  #guias2{position:absolute;left:0;top:508px;width:2560px;height:423px;outline:3px dashed #ff0;display:none}
+</style></head>
+<body>
+<div id="capa">
+  <canvas id="grao" width="2560" height="1440"></canvas>
+  <div id="neblina"></div>
+  <div id="foto"><div class="img"></div><div class="leg">Colares, 1977</div></div>
+  <div class="papel" id="ficha">
+    <div class="t" style="top:30px;font-size:34px;color:#444">INQUÉRITO Nº 001/1966</div>
+    <div class="t" style="top:90px">Local: Morro do Vintém</div>
+    <div class="t" style="top:140px">Vítimas: 2</div>
+    <div class="t" style="top:190px">Causa da morte:</div>
+    <div class="t" style="top:240px;color:#a11">INDETERMINADA</div>
+  </div>
+  <div class="papel" id="bilhete">
+    <div class="m" style="top:28px">aguardar sinal...</div>
+    <div class="m" style="top:130px">máscara</div>
+  </div>
+  <div id="carimbo">ARQUIVADO</div>
+  <img id="lupa" src="lupa_transparente.png">
+  <div id="vinheta"></div>
+  <div id="seguro">
+    <div class="tag">CASOS REAIS · BRASIL</div>
+    <div class="l1">INQUÉRITO</div>
+    <div class="l2">SOMBRIO</div>
+    <div class="barra"></div>
+    <div class="slogan">Os mistérios que <b>a polícia nunca resolveu</b></div>
+  </div>
+  <div id="guias2"></div><div id="guias"></div>
+</div>
+<script>
+  if (location.hash === '#guias' || location.search.includes('guias')) { document.getElementById('guias').style.display = 'block'; document.getElementById('guias2').style.display = 'block'; }
+  const c = document.getElementById('grao').getContext('2d'); let s = 3; const r = () => (s = s * 16807 % 2147483647) / 2147483647;
+  for (let i = 0; i < 90000; i++) { c.fillStyle = r() < .5 ? '#fff' : '#000'; c.fillRect(r() * 2560, r() * 1440, 2, 2); }
+</script>
+</body></html>

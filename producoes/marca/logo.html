@@ -1,0 +1,63 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000} body.transp,body.transp html{background:transparent} #logo{width:800px;height:800px;display:block}</style></head>
+<body>
+<svg id="logo" viewBox="-28 -28 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="fundo" cx="45%" cy="42%" r="65%">
+      <stop offset="0" stop-color="#2a0709"/><stop offset="0.5" stop-color="#0c0405"/><stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <radialGradient id="lente" cx="42%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#1b0b0c"/><stop offset="0.7" stop-color="#070304"/><stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="aro" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f2f2"/><stop offset="0.35" stop-color="#8d939a"/><stop offset="0.55" stop-color="#d9dde2"/><stop offset="1" stop-color="#3a3d42"/>
+    </linearGradient>
+    <linearGradient id="cabo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a1a14"/><stop offset="0.5" stop-color="#5a3a2a"/><stop offset="1" stop-color="#1a100c"/>
+    </linearGradient>
+    <radialGradient id="reflexo" cx="35%" cy="28%" r="40%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="brilho" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="difuso"><feGaussianBlur stdDeviation="40"/></filter>
+    <clipPath id="dentro"><circle cx="350" cy="350" r="196"/></clipPath>
+  </defs>
+  <rect id="bg" x="-28" y="-28" width="800" height="800" fill="url(#fundo)"/>
+  <circle cx="350" cy="350" r="230" fill="#e0262b" opacity=".22" filter="url(#difuso)"/>
+  <!-- cabo -->
+  <g transform="rotate(-45 350 350)">
+    <rect x="320" y="585" width="60" height="38" rx="6" fill="url(#aro)"/>
+    <rect x="316" y="618" width="68" height="190" rx="30" fill="url(#cabo)" stroke="#000" stroke-width="4"/>
+  </g>
+  <!-- lente com a digital -->
+  <circle cx="350" cy="350" r="200" fill="url(#lente)"/>
+  <g clip-path="url(#dentro)"><g id="digital" fill="none" stroke="#ff3b3f" stroke-linecap="round" filter="url(#brilho)"></g></g>
+  <circle cx="350" cy="350" r="200" fill="url(#reflexo)"/>
+  <circle cx="350" cy="350" r="212" fill="none" stroke="url(#aro)" stroke-width="30"/>
+  <circle cx="350" cy="350" r="227" fill="none" stroke="#000" stroke-width="3" opacity=".6"/>
+</svg>
+<script>
+if (location.search.includes('transp')) { document.getElementById('bg').remove(); document.body.classList.add('transp'); document.documentElement.style.background = 'transparent'; }
+// digital (desenho próprio): cristas em laço, com pequenas falhas, como uma impressão digital real
+const g = document.getElementById('digital'); let s = 5; const r = () => (s = s * 16807 % 2147483647) / 2147483647;
+const cx = 350, cy = 330, NS = 'http://www.w3.org/2000/svg';
+function crista(k) {
+  const rx = 7 + k * 17, ry = 11 + k * 20, pts = [];
+  for (let a = -200; a <= 20; a += 3) {                       // arco superior + laterais (formato de laço)
+    const t = a * Math.PI / 180, w = 1 + 0.025 * Math.sin(t * 5 + k);
+    pts.push([cx + Math.cos(t) * rx * w, cy + Math.sin(t) * ry * w]);
+  }
+  const [xf, yf] = pts[pts.length - 1], [xi, yi] = pts[0];
+  for (let i = 1; i <= 16; i++) pts.push([xf + i * 0.6, yf + i * 12]);   // perna direita do laço descendo
+  pts.unshift(...Array.from({ length: 16 }, (_, i) => [xi - (16 - i) * 0.6, yi + (16 - i) * 12])); // perna esquerda
+  let d = '', on = true, n = 0, lim = 10 + r() * 25;
+  pts.forEach(([x, y]) => { n++; if (n > lim) { on = !on; n = 0; lim = on ? 14 + r() * 30 : 1 + r() * 1.5; if (on) d += ` M${x.toFixed(1)},${y.toFixed(1)}`; return; }
+    if (on) d += (d === '' ? 'M' : ' L') + `${x.toFixed(1)},${y.toFixed(1)}`; });
+  const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('stroke-width', 5.5); p.setAttribute('opacity', 1 - k * 0.04); g.appendChild(p);
+}
+for (let k = 0; k <= 13; k++) crista(k);
+</script>
+</body></html>
