@@ -1,6 +1,6 @@
 # Fila de temas · Casos Sem Resposta
 
-Canal dark de mistérios e casos reais brasileiros. Vídeos longos de 10 min (1920x1080, só voz, animações próprias).
+Canal dark de mistérios e casos reais do Brasil e do mundo. Vídeos longos de 10 min (1920x1080, só voz, animações próprias).
 Marque com `[x]` o que já foi produzido. ⚠️ indica fato que precisa de checagem extra antes do roteiro.
 
 ## Vídeos longos (10 min)
