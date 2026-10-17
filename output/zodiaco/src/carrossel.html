@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<title>Carrossel · Caso Zodíaco</title>
+<style>
+@font-face{font-family:Mont;src:url(../../../producoes/marca/Montserrat-ExtraBold.ttf);font-weight:800}
+@font-face{font-family:Mont;src:url(../../../producoes/marca/Montserrat-Medium.ttf);font-weight:500}
+@font-face{font-family:Type;src:url(../../../producoes/marca/SpecialElite.ttf)}
+:root{--bg:#0d0d0f;--ink:#f2efe8;--mute:#a19c93;--red:#e0262b;--redl:#ff4a4f;--paper:#e9e3d3;--pink:#1b1816;--m:96px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#222;font-family:Mont,sans-serif;color:var(--ink)}
+.s{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--bg);margin:0 0 40px}
+.s::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 35%,rgba(224,38,43,.10),transparent 55%),radial-gradient(140% 100% at 50% 50%,transparent 55%,rgba(0,0,0,.65));z-index:0}
+.grain{position:absolute;inset:0;opacity:.07;z-index:1;pointer-events:none}
+.thread{position:absolute;inset:0;z-index:2;pointer-events:none}
+.c{position:absolute;left:var(--m);right:var(--m);top:120px;bottom:250px;z-index:3;display:flex;flex-direction:column}
+.kick{position:absolute;top:72px;left:var(--m);right:var(--m);z-index:3;font-family:Type;font-size:25px;letter-spacing:.06em;color:var(--mute);display:flex;justify-content:space-between}
+.kick b{color:var(--red);font-weight:400}
+.foot{position:absolute;left:var(--m);right:var(--m);bottom:72px;z-index:3;display:flex;align-items:center;justify-content:space-between;font-size:26px;font-weight:500;color:var(--mute)}
+.foot .who{display:flex;align-items:center;gap:16px;color:var(--ink)}
+.foot img{width:54px;height:54px;border-radius:50%;border:2px solid #3a3a3e}
+.foot .n{display:flex;align-items:center;gap:18px;font-family:Type;font-size:27px}
+.foot .n i{font-style:normal;font-family:Mont;font-weight:800;color:var(--red);font-size:34px}
+h1{font-weight:800;font-size:100px;line-height:1.02;letter-spacing:-.025em}
+h2{font-weight:800;font-size:84px;line-height:1.04;letter-spacing:-.02em}
+.sub{font-weight:500;font-size:40px;line-height:1.32;color:#d9d4ca}
+.r{color:var(--redl)}
+.step{font-family:Type;font-size:30px;color:var(--red);letter-spacing:.08em;margin-bottom:22px;display:flex;align-items:center;gap:18px}
+.step::after{content:"";flex:0 0 160px;height:2px;background:var(--red);opacity:.6}
+.paper{background:var(--paper);color:var(--pink);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.paper::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(120,90,40,.10),transparent 40%),radial-gradient(circle at 85% 80%,rgba(120,90,40,.14),transparent 45%);pointer-events:none}
+.tag{position:absolute;font-family:Type;font-size:20px;letter-spacing:.12em;padding:6px 12px;border:2px solid var(--red);color:var(--red);background:rgba(233,227,211,.92);z-index:5}
+.tag.d{background:rgba(13,13,15,.85)}
+.grid{display:grid;font-family:Mont;font-weight:800;justify-items:center;align-items:center}
+.g{display:inline-block;line-height:1}
+.g.sh{border-radius:50%}
+.stamp{display:inline-block;font-family:Type;font-size:26px;letter-spacing:.14em;color:var(--red);border:3px solid var(--red);padding:8px 18px;transform:rotate(-3deg)}
+.swipe{display:inline-flex;align-items:center;gap:16px;font-weight:800;font-size:30px;letter-spacing:.06em;color:var(--bg);background:var(--ink);padding:16px 30px;border-radius:60px}
+</style></head><body>
+
+<!-- 01 · GANCHO -->
+<section class="s" data-t="0">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span><b>●</b> CASO ZODÍACO · 1969</span></div>
+  <div class="c" style="align-items:center;text-align:center;top:150px">
+    <div class="paper" style="width:820px;padding:40px 36px 34px;transform:rotate(-2.2deg);margin-bottom:70px">
+      <div class="grid cipher" data-cols="12" data-rows="5" data-seed="7" data-red="3,16,29,41,52" data-size="44" style="gap:12px 10px"></div>
+      <span class="tag" style="right:-14px;top:-18px;transform:rotate(3deg)">RECRIAÇÃO</span>
+    </div>
+    <h1 style="font-size:98px">O assassino deixou um código.</h1>
+    <p class="sub" style="font-size:50px;font-weight:800;color:var(--ink);margin-top:26px;line-height:1.15">Ele só foi quebrado <span class="r">51 anos</span> depois.</p>
+    <div style="margin-top:54px"><span class="swipe">ARRASTE <span style="font-size:36px">→</span></span></div>
+  </div>
+</section>
+
+<!-- 02 · CONTEXTO -->
+<section class="s" data-t="1">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <svg style="position:absolute;right:-170px;top:110px;z-index:3;opacity:.95" width="560" height="560" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#e0262b" stroke-width="5"/><path d="M50 0V100M0 50H100" stroke="#e0262b" stroke-width="5"/></svg>
+  <div class="c" style="top:200px;right:300px">
+    <p class="step">ONDE TUDO COMEÇA</p>
+    <h2>Califórnia,<br>1968–1969.</h2>
+    <p class="sub" style="margin-top:40px">Um homem ataca casais em estradas e um taxista em São Francisco.</p>
+    <p class="sub" style="margin-top:26px">Depois, começa a escrever para os jornais. E assina com este símbolo.</p>
+  </div>
+  <div style="position:absolute;left:var(--m);bottom:290px;z-index:3">
+    <p style="font-weight:800;font-size:58px;letter-spacing:-.01em">Ele <span class="r">nunca</span> foi pego.</p>
+  </div>
+</section>
+
+<!-- 03 · NÚMEROS -->
+<section class="s" data-t="2">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <div class="c" style="top:170px">
+    <p class="step">O CASO EM NÚMEROS</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px 40px;margin-top:40px">
+      <div><div style="font-weight:800;font-size:220px;line-height:.9">5</div><p class="sub" style="margin-top:14px">mortes confirmadas</p></div>
+      <div><div style="font-weight:800;font-size:220px;line-height:.9">2</div><p class="sub" style="margin-top:14px">sobreviventes</p></div>
+      <div><div style="font-weight:800;font-size:220px;line-height:.9" class="r">37</div><p class="sub" style="margin-top:14px">vítimas que ele dizia ter, nas cartas</p></div>
+      <div><div style="font-weight:800;font-size:220px;line-height:.9">0</div><p class="sub" style="margin-top:14px">pessoas acusadas até hoje</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · CÓDIGO 408 -->
+<section class="s" data-t="3">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <div class="c" style="top:160px">
+    <p class="step">CÓDIGO 1 DE 2 · 1/4</p>
+    <h2><span class="r">408</span> símbolos.<br>Três jornais.</h2>
+    <p class="sub" style="margin-top:34px">Julho de 1969: ele divide o código em 3 partes, manda uma para cada jornal e exige a capa.</p>
+    <div style="position:relative;height:300px;margin-top:40px">
+      <div class="paper" style="position:absolute;left:0;top:30px;width:290px;padding:22px;transform:rotate(-4deg)"><div class="grid cipher" data-cols="6" data-rows="4" data-seed="11" data-red="5,17" data-size="30" style="gap:8px"></div></div>
+      <div class="paper" style="position:absolute;left:305px;top:0;width:290px;padding:22px;transform:rotate(2deg)"><div class="grid cipher" data-cols="6" data-rows="4" data-seed="23" data-red="9" data-size="30" style="gap:8px"></div></div>
+      <div class="paper" style="position:absolute;left:610px;top:40px;width:290px;padding:22px;transform:rotate(-1.5deg)"><div class="grid cipher" data-cols="6" data-rows="4" data-seed="41" data-red="2,20" data-size="30" style="gap:8px"></div></div>
+      <span class="tag d" style="right:0;top:-22px">RECRIAÇÃO</span>
+    </div>
+    <p class="sub" style="margin-top:6px">Um professor e a esposa decifram em poucos dias.</p>
+    <p style="margin-top:22px;font-weight:800;font-size:46px">Mas o nome dele <span class="r">não estava lá.</span></p>
+  </div>
+</section>
+
+<!-- 05 · CÓDIGO 340 -->
+<section class="s" data-t="4">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <div style="position:absolute;right:-60px;top:96px;z-index:3;font-weight:800;font-size:400px;line-height:1;color:transparent;-webkit-text-stroke:3px rgba(224,38,43,.85);letter-spacing:-.04em">340</div>
+  <div class="c" style="top:540px">
+    <p class="step">CÓDIGO 2 DE 2 · 2/4</p>
+    <h2>Novembro de 1969.<br>Chega o segundo.</h2>
+    <p class="sub" style="margin-top:36px">O FBI tenta. Criptógrafos tentam. Milhares de amadores tentam.</p>
+    <p style="margin-top:44px;font-weight:800;font-size:52px;line-height:1.15">Por <span class="r">51 anos</span>, ninguém lê uma única palavra.</p>
+  </div>
+</section>
+
+<!-- 06 · A QUEBRA -->
+<section class="s" data-t="5">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <div class="c" style="top:150px;justify-content:center">
+    <p class="step">A QUEBRA · 3/4</p>
+    <h2>Dezembro<br>de <span class="r">2020</span>.</h2>
+    <svg width="888" height="120" viewBox="0 0 888 120" style="margin:46px 0 30px;overflow:visible">
+      <line x1="10" y1="60" x2="878" y2="60" stroke="#57534d" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round"/>
+      <circle cx="12" cy="60" r="14" fill="#f2efe8"/><circle cx="876" cy="60" r="18" fill="#e0262b"/>
+      <text x="0" y="118" fill="#a19c93" font-family="Type" font-size="30">1969</text>
+      <text x="888" y="118" fill="#ff4a4f" font-family="Type" font-size="30" text-anchor="end">2020</text>
+      <text x="444" y="36" fill="#a19c93" font-family="Type" font-size="28" text-anchor="middle">51 anos em silêncio</text>
+    </svg>
+    <p class="sub">Três amadores (nos EUA, na Austrália e na Bélgica) testam no computador centenas de milhares de leituras.</p>
+    <p class="sub" style="margin-top:26px;color:var(--ink)"><b style="font-weight:800">O truque: o texto estava embaralhado na diagonal.</b> O FBI confirma a solução.</p>
+  </div>
+</section>
+
+<!-- 07 · O QUE ESTAVA ESCRITO -->
+<section class="s" data-t="6">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <div class="c" style="top:150px;justify-content:center">
+    <p class="step">O QUE ESTAVA ESCRITO · 4/4</p>
+    <div class="paper" style="padding:64px 60px 56px;transform:rotate(-1.2deg);margin-top:20px">
+      <p style="font-family:Type;font-size:44px;line-height:1.42">“Espero que vocês estejam se divertindo muito tentando me pegar.<br><br>Não tenho medo da câmara de gás, porque ela vai me mandar para o paraíso mais cedo.”</p>
+      <p style="font-family:Type;font-size:24px;margin-top:34px;color:#6b6358">Trecho do código 340 · tradução livre</p>
+      <span class="tag" style="right:-12px;top:-18px;transform:rotate(2deg)">RECRIAÇÃO</span>
+    </div>
+    <p style="margin-top:60px;font-weight:800;font-size:60px">De novo: <span class="r">nenhum nome.</span></p>
+  </div>
+</section>
+
+<!-- 08 · VIRADA -->
+<section class="s" data-t="7">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <div class="c" style="top:150px;justify-content:center">
+    <p class="step">O QUE FALTA</p>
+    <h2 style="font-size:76px">Ainda há dois códigos <span class="r">sem solução.</span></h2>
+    <p class="sub" style="margin-top:34px">Um deles, de abril de 1970, vem logo depois desta frase:</p>
+    <p style="font-family:Type;font-size:84px;margin-top:44px;color:var(--ink)">“Meu nome é —”</p>
+    <div class="grid cipher boxes" data-cols="13" data-rows="1" data-seed="91" data-red="0,1,2,3,4,5,6,7,8,9,10,11,12" data-size="44" style="margin-top:34px;gap:8px;justify-content:start"></div>
+    <p class="sub" style="margin-top:40px">13 símbolos. Ninguém decifrou até hoje.</p>
+  </div>
+</section>
+
+<!-- 09 · PRINTÁVEL -->
+<section class="s" data-t="8">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ZODÍACO</span></div>
+  <svg style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:2;opacity:.13" width="900" height="900" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#e0262b" stroke-width="3"/><path d="M50 0V100M0 50H100" stroke="#e0262b" stroke-width="3"/></svg>
+  <div class="c" style="align-items:center;justify-content:center;text-align:center;top:100px">
+    <h1 style="font-size:104px">Ele queria<br>ser <span class="r">lido.</span></h1>
+    <h1 style="font-size:104px;margin-top:30px">Não queria<br>ser <span class="r">achado.</span></h1>
+    <p class="sub" style="margin-top:56px;font-size:46px;color:var(--ink)">Até hoje, conseguiu as duas coisas.</p>
+  </div>
+</section>
+
+<!-- 10 · CTA -->
+<section class="s" data-t="9">
+  <div class="kick"><span>INQUÉRITO SOMBRIO</span><span>CASO ENCERRADO? NÃO.</span></div>
+  <div class="c" style="align-items:center;text-align:center;top:170px">
+    <img src="avatar.png" style="width:260px;height:260px;border-radius:50%;border:4px solid var(--red);box-shadow:0 0 80px rgba(224,38,43,.35)">
+    <p style="font-family:Type;font-size:40px;margin-top:30px;color:var(--ink)">@inqueritosombrio</p>
+    <h2 style="font-size:78px;margin-top:44px">Siga para ver um caso <span class="r">sem resposta</span> por semana.</h2>
+    <p class="sub" style="margin-top:30px;font-size:36px">Só fatos checados. Fato, relato e teoria sempre separados.</p>
+    <div style="margin-top:44px"><span class="swipe" style="background:var(--red);color:#fff;padding:20px 64px;font-size:34px">SEGUIR</span></div>
+  </div>
+</section>
+
+<script>
+const N = document.querySelectorAll('.s').length;
+// fio vermelho: sai pela direita na mesma altura em que entra no slide seguinte
+const Y = [1150, 1128, 1172, 1140, 1165, 1125, 1170, 1138, 1160, 1145, 1150];
+const NS = 'http://www.w3.org/2000/svg';
+document.querySelectorAll('.s').forEach((s, i) => {
+  const t = document.createElementNS(NS, 'svg'); t.setAttribute('class', 'thread'); t.setAttribute('viewBox', '0 0 1080 1350');
+  const x0 = i === 0 ? 540 : -10, x1 = i === N - 1 ? 540 : 1090, y0 = Y[i], y1 = Y[i + 1];
+  const p = document.createElementNS(NS, 'path');
+  p.setAttribute('d', `M${x0},${y0} C${x0 + (x1 - x0) * .35},${y0 + 40} ${x0 + (x1 - x0) * .65},${y1 + 40} ${x1},${y1}`);
+  p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#e0262b'); p.setAttribute('stroke-width', 4); p.setAttribute('opacity', .9);
+  t.appendChild(p);
+  const pins = [];
+  if (i === 0) pins.push([x0, y0]); if (i === N - 1) pins.push([x1, y1]);
+  pins.forEach(([x, y]) => { for (const [r, f] of [[13, '#7a1215'], [9, '#e0262b'], [3, '#ffb3b5']]) { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', x); c.setAttribute('cy', y - (r === 3 ? 3 : 0)); c.setAttribute('r', r); c.setAttribute('fill', f); t.appendChild(c); } });
+  s.appendChild(t);
+  // granulado de papel
+  s.insertAdjacentHTML('beforeend', `<svg class="grain" viewBox="0 0 1080 1350"><filter id="n${i}"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="${i + 3}"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0"/></filter><rect width="1080" height="1350" filter="url(#n${i})"/></svg>`);
+  // rodapé
+  const last = i === N - 1;
+  s.insertAdjacentHTML('beforeend', `<div class="foot"><span class="who"><img src="avatar.png">@inqueritosombrio</span><span class="n">${String(i + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')}${last ? '' : '<i>→</i>'}</span></div>`);
+});
+// códigos recriados: letras invertidas, giradas e formas simples, como nas cartas originais
+const L = 'ABCDEFGHJKLMNPRSTUVWYZ';
+document.querySelectorAll('.cipher').forEach(el => {
+  let s = +el.dataset.seed; const rnd = () => (s = s * 16807 % 2147483647) / 2147483647;
+  const cols = +el.dataset.cols, rows = +el.dataset.rows, sz = +el.dataset.size, red = (el.dataset.red || '').split(',').map(Number);
+  el.style.gridTemplateColumns = `repeat(${cols}, ${el.classList.contains('boxes') ? sz + 16 + 'px' : '1fr'})`;
+  for (let k = 0; k < cols * rows; k++) {
+    const isR = red.includes(k), col = isR ? '#e0262b' : '#1b1816', v = rnd(), g = document.createElement('span');
+    g.className = 'g'; g.style.color = col; g.style.fontSize = sz + 'px';
+    if (v < .12) { g.className += ' sh'; g.style.width = g.style.height = sz * .62 + 'px'; g.style.border = `${sz * .1}px solid ${col}`; }
+    else if (v < .2) { g.style.width = g.style.height = sz * .6 + 'px'; g.style.background = col; g.style.clipPath = 'polygon(50% 0,100% 100%,0 100%)'; }
+    else if (v < .26) { g.textContent = '+'; }
+    else { g.textContent = L[Math.floor(rnd() * L.length)]; const m = rnd(); g.style.transform = m < .3 ? 'rotate(180deg)' : m < .55 ? 'scaleX(-1)' : m < .65 ? 'rotate(90deg)' : 'none'; }
+    if (el.classList.contains('boxes')) { const b = document.createElement('span'); b.style.cssText = `display:flex;align-items:center;justify-content:center;width:${sz + 16}px;height:${sz + 24}px;border:2px solid #57534d;background:rgba(242,239,232,.04)`; g.style.color = '#ff4a4f'; if (g.style.background) g.style.background = '#ff4a4f'; if (g.style.border) g.style.borderColor = '#ff4a4f'; b.appendChild(g); el.appendChild(b); }
+    else el.appendChild(g);
+  }
+});
+</script>
+</body></html>
