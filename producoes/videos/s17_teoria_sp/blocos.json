@@ -1,0 +1,10 @@
+[
+ {"id": "c01", "texto": "Nove corpos. O mesmo jeito. Em pouco mais de um mês. A internet já deu um nome para isso.", "pausa": 0.45, "vel": -4, "tom": -1},
+ {"id": "c02", "texto": "Desde o começo de setembro, pessoas vêm sendo encontradas mortas em São Paulo e na Grande São Paulo.", "pausa": 0.3},
+ {"id": "c03", "texto": "Amarradas. Algumas em posição fetal. Enroladas em sacos pretos, lençóis ou cobertores.", "pausa": 0.4, "vel": -3},
+ {"id": "c04", "texto": "Uma no Jabaquara. Outra numa ciclovia, perto do CT do Corinthians. Outra na água de uma represa, embaixo da Rodovia Anchieta.", "pausa": 0.35, "vel": 2},
+ {"id": "c05", "texto": "O padrão se repetiu tantas vezes que as redes passaram a falar em serial killer.", "pausa": 0.45},
+ {"id": "c06", "texto": "Mas, quando os investigadores olharam caso por caso, a pista apontou para outra coisa.", "pausa": 0.5, "vel": -3, "tom": -1},
+ {"id": "c07", "texto": "Uma família contou que a vítima foi colocada dentro de um carro. Para a polícia, isso é característica do tribunal do crime: os julgamentos clandestinos do crime organizado.", "pausa": 0.45},
+ {"id": "c08", "texto": "Até agora, ninguém foi preso. Então me diz: um assassino sozinho... ou um tribunal inteiro?", "pausa": 0, "vel": -5, "tom": -1}
+]
