@@ -36,3 +36,10 @@ Cenas e visuais: ver `cenas.py` (âncoras de texto → animação ou footage).
 - Wikipedia, 1986 Brazilian UFO incident: https://en.wikipedia.org/wiki/1986_Brazilian_UFO_incident
 - TNH1 / Folhapress (40 anos): https://www.tnh1.com.br/noticia/nid/40-anos-da-noite-em-que-cacas-da-forca-aerea-perseguiram-21-ovnis/
 - Acervo no Arquivo Nacional (SIAN, fundo de OVNIs da Aeronáutica)
+
+## v2 (18/10/2026) · refeito no padrão "imagem real sempre"
+- Roteiro enxugado para **50,5 s** (119 palavras), voz Antonio.
+- **Imagem real:** Base Aérea de Santa Cruz (foto de arquivo, domínio público); F-5 da FAB decolando (Marco Aurélio Esparza, CC BY-SA 3.0); F-5E da FAB no hangar (Renato Spilimbergo Carvalho, GFDL 1.2); cabine à noite (NASA, via Pixabay); caças em formação e céu noturno (Pixabay).
+- **Recriação só onde não existe imagem:** a tela do radar com os 13 contatos e a luz vermelha vista pelo piloto (etiqueta RECRIAÇÃO).
+- Descartados na validação: caças em computação gráfica do Pixabay (usados na v1), pódio em desenho animado, tela de voo comercial com código de companhia aérea.
+- A v1 (animações + ElevenLabs/Antonio, 67 s) ficou em `cenas_v1.py` e `blocos_v1_elevenlabs.json`.

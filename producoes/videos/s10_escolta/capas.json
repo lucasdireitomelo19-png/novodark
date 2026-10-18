@@ -1,2 +1,2 @@
-[{"nome": "capa_a", "cena": "escolta", "t": 3.2, "p": {"passo": 0}, "l1": "13 OBJETOS", "l2": "ATRÁS DO CAÇA", "tag": "FAB · 19/05/1986"},
- {"nome": "capa_b", "cena": "luz", "t": 1.2, "p": {}, "l1": "A FAB NÃO", "l2": "EXPLICOU", "tag": "NOITE OFICIAL DOS OVNIS"}]
+[{"nome": "capa_a", "foto": "/tmp/claude-0/f10a.jpg", "px": 0.42, "zoom": 1.7, "l1": "13 OBJETOS", "l2": "ATRÁS DO F-5", "tag": "FAB · 19/05/1986"},
+ {"nome": "capa_b", "cena": "escolta", "t": 3.2, "p": {"passo": 0}, "l1": "13 OBJETOS", "l2": "ATRÁS DO CAÇA", "tag": "FAB · 19/05/1986"}]

@@ -44,6 +44,14 @@
   "pagina": "https://stocksnap.io/photo/car-vehicle-G0TTZTGAIB",
   "titulo": "Car Vehicle"
  },
+ "b_ceu_lua_nuvens.mp4": {
+  "autor": "loswin23",
+  "credito": "Vídeo: loswin23 / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:351249",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-351249/"
+ },
  "b_chuva_janela.jpg": {
   "autor": "Mary",
   "credito": "Imagem: stocksnap (CC0)",
@@ -70,6 +78,14 @@
   "licenca": "cc0",
   "pagina": "https://stocksnap.io/photo/grey-dark-07DB6F371B",
   "titulo": "Grey Dark"
+ },
+ "b_cockpit_noite.mp4": {
+  "autor": "NASA-Imagery",
+  "credito": "Vídeo: NASA-Imagery / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:242",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-242/"
  },
  "b_comprimidos.jpg": {
   "autor": "Michal Jarmoluk",
@@ -142,6 +158,22 @@
   "licenca": "cc0",
   "pagina": "https://stocksnap.io/photo/people-man-550EI0JY0J",
   "titulo": "People Man"
+ },
+ "b_jato_decolagem.mp4": {
+  "autor": "Stuck1",
+  "credito": "Vídeo: Stuck1 / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:32948",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-32948/"
+ },
+ "b_jatos_formacao.mp4": {
+  "autor": "Trek_Jason",
+  "credito": "Vídeo: Trek_Jason / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:280976",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-280976/"
  },
  "b_jornais.jpg": {
   "autor": "",
@@ -242,6 +274,22 @@
   "pagina": "https://www.rawpixel.com/image/3284794/free-photo-image-star-sky-background-hills",
   "titulo": "long exposure shot star-filled night"
  },
+ "b_radar_sonar.mp4": {
+  "autor": "TH-DARK-Media",
+  "credito": "Vídeo: TH-DARK-Media / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:2420",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-2420/"
+ },
+ "b_radar_tela.mp4": {
+  "autor": "8385",
+  "credito": "Vídeo: 8385 / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:4511",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-4511/"
+ },
  "b_radio_antigo.jpg": {
   "autor": "",
   "credito": "Imagem: rawpixel (CC0)",
@@ -286,6 +334,14 @@
   "licenca": "cc0",
   "pagina": "https://www.rawpixel.com/image/5928240/photo-image-background-public-domain-black",
   "titulo": "Free black wristwatch image"
+ },
+ "b_s10_caca_a.mp4": {
+  "autor": "AdisResic",
+  "credito": "Vídeo: AdisResic / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:244334",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-244334/"
  },
  "b_s10_caca_b.mp4": {
   "autor": "JuliusH",
@@ -717,6 +773,27 @@
   "licenca": "cc by-sa 2.0",
   "pagina": "https://commons.wikimedia.org/wiki/File:Dam_Cocorob%C3%B3_A%C3%A7ude_Cocorob%C3%B3_%2823798031281%29.jpg"
  },
+ "w_f5_decolando.jpg": {
+  "credito": "Foto: Marco Aurélio Esparza / Wikimedia Commons (CC BY-SA 3.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Academia da Força Aérea (AFA) em Pirassununga-SP. Caça F-5EM (4856) da Força Aérea Brasileira decolando no Domingo Aéreo 2015. Atualmente, a FAB possui uma - panoramio.jpg",
+  "licenca": "cc by-sa 3.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Academia_da_For%C3%A7a_A%C3%A9rea_%28AFA%29_em_Pirassununga-SP._Ca%C3%A7a_F-5EM_%284856%29_da_For%C3%A7a_A%C3%A9rea_Brasileira_decolando_no_Domingo_A%C3%A9reo_2015._Atualmente%2C_a_FAB_possui_uma_-_panoramio.jpg"
+ },
+ "w_f5_voo.jpg": {
+  "credito": "Foto: Marco Aurélio Esparza / Wikimedia Commons (CC BY-SA 3.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Academia da Força Aérea (AFA) em Pirassununga-SP. Caça F-5EM (4856) da Força Aérea Brasileira se apresentando no Domingo Aéreo 2015. Atualmente, a FAB poss - panoramio (3).jpg",
+  "licenca": "cc by-sa 3.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Academia_da_For%C3%A7a_A%C3%A9rea_%28AFA%29_em_Pirassununga-SP._Ca%C3%A7a_F-5EM_%284856%29_da_For%C3%A7a_A%C3%A9rea_Brasileira_se_apresentando_no_Domingo_A%C3%A9reo_2015._Atualmente%2C_a_FAB_poss_-_panoramio_%283%29.jpg"
+ },
+ "w_f5e_fab2.jpg": {
+  "credito": "Foto: Renato Spilimbergo Carvalho / Wikimedia Commons (GFDL 1.2)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Northrop F-5E Tiger II, Brazil - Air Force AN1136741.jpg",
+  "licenca": "gfdl 1.2",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Northrop_F-5E_Tiger_II%2C_Brazil_-_Air_Force_AN1136741.jpg"
+ },
  "w_inga_1.jpg": {
   "autor": "Marinelson Almeida",
   "credito": "Foto: Marinelson Almeida / Wikimedia Commons (CC BY 2.0)",
@@ -724,5 +801,19 @@
   "id": "commons:File:Pedra de Itacoatiaras na Cidade de Ingá - Paraíba. (7546071898).jpg",
   "licenca": "cc by 2.0",
   "pagina": "https://commons.wikimedia.org/wiki/File:Pedra_de_Itacoatiaras_na_Cidade_de_Ing%C3%A1_-_Para%C3%ADba._(7546071898).jpg"
+ },
+ "w_mirage_fab.jpg": {
+  "credito": "Foto: Rob Schleiffert / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Mirage IIIEBR (F-103E) (16560569889).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Mirage_IIIEBR_%28F-103E%29_%2816560569889%29.jpg"
+ },
+ "w_santa_cruz.jpg": {
+  "credito": "Foto: Base Aérea de Santa Cruz / Wikimedia Commons (domínio público)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Solenidade de aniversário do 1º G. A. de Caça, na Base Aérea de Santa Cruz 2.tif",
+  "licenca": "domínio público",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Solenidade_de_anivers%C3%A1rio_do_1%C2%BA_G._A._de_Ca%C3%A7a%2C_na_Base_A%C3%A9rea_de_Santa_Cruz_2.tif"
  }
 }
