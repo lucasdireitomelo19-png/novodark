@@ -43,3 +43,11 @@ Cenas e visuais: ver `cenas.py` (âncoras de texto → animação ou footage).
 - **Recriação só onde não existe imagem:** a tela do radar com os 13 contatos e a luz vermelha vista pelo piloto (etiqueta RECRIAÇÃO).
 - Descartados na validação: caças em computação gráfica do Pixabay (usados na v1), pódio em desenho animado, tela de voo comercial com código de companhia aérea.
 - A v1 (animações + ElevenLabs/Antonio, 67 s) ficou em `cenas_v1.py` e `blocos_v1_elevenlabs.json`.
+
+## v3 (18/10/2026) · padrão "90% vídeo"
+- Mesmo roteiro e narração da v2 (50,5 s, 119 palavras). Só o visual mudou.
+- **~90% do tempo de tela é vídeo real em movimento:** antenas de radar, caças em formação (Mixkit), pátio de aeroporto e decolagem à noite (Mixkit), céu com lua (Mixkit/Pixabay), HUD de cabine (NASA, via Pixabay).
+- Fotos saíram. Animação ficou só em ~4,5 s: o radar de bordo com 7 + 6 contatos e a luz vermelha que se apaga (RECRIAÇÃO).
+- A citação do ministro virou texto sobre vídeo.
+- "Num caça F-5" usa caças em formação genéricos (IMAGEM ILUSTRATIVA). O Commons tem vídeo real de F-5, mas está bloqueando downloads (HTTP 429). Se entrar `src/b_c_f5_formacao.mp4`, o `cenas.py` já usa esse clipe sozinho.
+- Capa A: frame de vídeo (caças em formação). A v2 (fotos) está em `cenas_v2_fotos.py`.

@@ -3,6 +3,7 @@
 Pipeline e instruções de uso: `producoes/README.md`. Entregas: página "Central dos Canais" (claude.ai/artifact/UZ3YFHzLpBjiJj3Mskzj1q, coleção `videos` do banco) e "Inquérito Sombrio · Entregas" (claude.ai/artifact/YaDQyFQxwNBrj6TBXS38D7).
 
 ## Imagem real sempre (regra do dono do canal, vale para TODO vídeo)
+- **90% do tempo de tela é VÍDEO real (footage em movimento).** Foto (mesmo real) e animação somadas ficam em no máximo 10% do vídeo. Foto com Ken Burns não conta como vídeo.
 - A linguagem visual principal é **imagem real**: vídeo real (Pixabay) e foto real (Wikimedia Commons, acervos em domínio público). Animação é exceção.
 - Se a narração cita um objeto, lugar ou máquina, **mostre um vídeo ou foto real dele**: falou de F-5 ou Mirage, aparece um caça de verdade (foto do F-5/Mirage da FAB no Commons + footage de caça no Pixabay); falou de radar, aparece uma tela de radar real; falou de navio, um navio.
 - Ordem de preferência: footage real literal → footage real contextual → foto/documento real (arquivo, Commons) → mapa → animação. Animação só para o que não dá para filmar (rota, número, reconstrução) e nunca como plano principal de um trecho.

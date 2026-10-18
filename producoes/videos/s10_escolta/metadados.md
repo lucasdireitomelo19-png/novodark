@@ -10,7 +10,7 @@
 O que aconteceu na Noite Oficial dos OVNIs está nos documentos da Aeronáutica, hoje no Arquivo Nacional.
 
 Fontes: Correio Braziliense (2022); relatório do COMDA (02/06/1986, divulgado em 2009); Arquivo Nacional.
-Imagens: animações próprias (recriação) e footage Pixabay (ilustrativo). Narração com voz sintética.
+Imagens: footage Mixkit e Pixabay/NASA (ilustrativo) e recriação do radar. Narração com voz sintética.
 
 #ovni #fab #misterio #noiteoficialdosovnis #inqueritosombrio #brasil #shorts
 
@@ -22,8 +22,8 @@ O piloto fez a curva para encarar o que estava atrás dele. Você teria feito? �
 Quer o vídeo completo da Noite Oficial dos OVNIs, com todos os caças daquela noite?
 
 ## Capas (teste A/B)
-- `capa_a.jpg`: "13 OBJETOS / ATRÁS DO CAÇA" sobre o radar de bordo (recomendada)
-- `capa_b.jpg`: "A FAB NÃO / EXPLICOU" sobre a luz vermelha
+- `capa_a.jpg`: "13 OBJETOS / ATRÁS DO CAÇA" sobre frame de vídeo de caças em formação (recomendada)
+- `capa_b.jpg`: "13 OBJETOS / ATRÁS DO CAÇA" sobre o radar de bordo (recriação)
 
 ## Próximo vídeo sugerido
 O Mirage que viu um objeto a "Mach 15": o relato do capitão Viriato (mesma noite, Anápolis-GO).
