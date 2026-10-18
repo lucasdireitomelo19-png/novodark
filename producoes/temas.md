@@ -20,13 +20,15 @@ Marque com `[x]` o que já foi produzido. ⚠️ indica fato que precisa de chec
 ## Shorts avulsos (61 s)
 - [x] Máscaras de chumbo · Operação Prato · Noite Oficial dos OVNIs · Varginha · Disco de Ubatuba
 - [x] Ilha da Queimada Grande · Fordlândia · Meteorito Bendegó · Luzia
+- [x] Noite Oficial dos OVNIs: a escolta de 13 objetos (s10) · Mach 15 (s11)
+- [ ] Noite Oficial dos OVNIs parte 3: Ozires Silva e as luzes vistas do avião
 - [ ] O Edifício Joelma e a lenda das 13 almas ⚠️ (tom respeitoso)
-- [ ] A Serra do Roncador e a expedição desaparecida de Percy Fawcett (1925)
+- [x] A Serra do Roncador e a expedição desaparecida de Percy Fawcett (1925) → s12
 - [ ] O Triângulo das Bermudas brasileiro? (mitos do litoral) ⚠️
-- [ ] Pedra do Ingá: as inscrições que ninguém decifrou (PB)
+- [x] Pedra do Ingá: as inscrições que ninguém decifrou (PB) → s14
 - [ ] A cidade submersa de Petrolândia / velha Canudos que reaparece na seca
 - [ ] O caso do Edifício Andraus (1972) ⚠️
-- [ ] Ilha da Trindade e a foto do "disco" de 1958
+- [x] Ilha da Trindade e a foto do "disco" de 1958 → s13
 - [ ] O Mapinguari: a lenda da Amazônia e o que os cientistas dizem
 - [ ] O túnel do Morro do Corcovado? ⚠️ (só com fonte)
 

@@ -141,12 +141,13 @@ function papel(x, y, w, h, rot, linhas = true) {
   if (linhas) { ctx.strokeStyle = 'rgba(70,110,170,.35)'; ctx.lineWidth = 2; for (let yy = -h / 2 + 110; yy < h / 2 - 30; yy += 74) { ctx.beginPath(); ctx.moveTo(-w / 2 + 20, yy); ctx.lineTo(w / 2 - 20, yy); ctx.stroke(); }
     ctx.strokeStyle = 'rgba(200,60,60,.4)'; ctx.beginPath(); ctx.moveTo(-w / 2 + 110, -h / 2); ctx.lineTo(-w / 2 + 110, h / 2); ctx.stroke(); }
 }
+// p.pronto: texto já escrito no 1º frame. p.linhas (opcional): texto próprio do bilhete; sem ele, usa o bilhete das máscaras de chumbo
 function bilhete(t, dur, p) {
   fundo('#140f0a', '#050302'); poeira(t, 30);
   const s = 1 + t * 0.012 + (p.foco !== undefined ? 0.15 : 0); ctx.save(); caber(1300); ctx.translate(W / 2, H / 2); ctx.scale(s, s); ctx.translate(-W / 2, -H / 2);
   papel(W / 2, H / 2, 1240, 780, -0.025);
-  const total = p.ate ?? BILHETE.length, vel = p.rapido ? 0.5 : (dur * 0.85) / total;
-  BILHETE.forEach((l, i) => { if (i >= total) return; const k0 = p.todos ? 0 : i * vel, n = Math.floor(clamp((t - k0) / (vel * 0.8), 0, 1) * l.length);
+  const L = p.linhas || BILHETE, total = p.ate ?? L.length, vel = p.rapido ? 0.5 : (dur * 0.85) / total;
+  L.forEach((l, i) => { if (i >= total) return; const k0 = p.todos ? 0 : i * vel, n = p.pronto ? l.length : Math.floor(clamp((t - k0) / (vel * 0.8), 0, 1) * l.length);
     const foco = p.foco === undefined || p.foco === i;
     ctx.font = '88px MAO'; ctx.fillStyle = foco ? TINTA : 'rgba(29,42,74,.35)'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
     const y = -390 + 140 + i * 74 + 30; ctx.fillText(l.slice(0, n), -620 + 140, y);
@@ -612,9 +613,212 @@ function fotos(t, dur, p) {
   vinheta(0.8); grao(t, 0.06);
 }
 
+// ---------- radar de cabine com contatos atrás do caça (Noite Oficial dos OVNIs) ----------
+// p: n (contatos, padrão 13: 7 à esquerda e 6 à direita), de (s em que começam a surgir), passo (s entre eles),
+//    vazio (sem contatos), rotulos (mostra 7 | 6), legenda
+function escolta(t, dur, p) {
+  fundo('#0b0303', '#000'); const cx = W / 2, cy = H * 0.5, R = Math.min(W, H) * 0.46, COR = '255,70,50';
+  ctx.strokeStyle = `rgba(${COR},.28)`; ctx.lineWidth = 2;
+  for (let k = 1; k <= 4; k++) { ctx.beginPath(); ctx.arc(cx, cy, R * k / 4, 0, 6.283); ctx.stroke(); }
+  for (let k = 0; k < 72; k++) { const a = k / 72 * 6.283, l = k % 6 ? 10 : 24; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); ctx.lineTo(cx + Math.cos(a) * (R - l), cy + Math.sin(a) * (R - l)); ctx.stroke(); }
+  ctx.setLineDash([8, 10]); ctx.beginPath(); ctx.moveTo(cx, cy - R); ctx.lineTo(cx, cy + R); ctx.moveTo(cx - R, cy); ctx.lineTo(cx + R, cy); ctx.stroke(); ctx.setLineDash([]);
+  const ang = t * 2.4 - Math.PI / 2; ctx.save(); ctx.translate(cx, cy);
+  for (let i = 0; i < 46; i++) { ctx.fillStyle = `rgba(${COR},${0.2 * (1 - i / 46)})`; ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, ang - (i + 1) * 0.022, ang - i * 0.022); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
+  // o caça no centro, apontando para cima
+  ctx.save(); ctx.translate(cx, cy); ctx.fillStyle = '#ffd9c8'; ctx.shadowColor = `rgba(${COR},1)`; ctx.shadowBlur = 20;
+  ctx.beginPath(); ctx.moveTo(0, -30); ctx.lineTo(20, 22); ctx.lineTo(0, 12); ctx.lineTo(-20, 22); ctx.closePath(); ctx.fill(); ctx.restore();
+  texto('F-5', cx + 44, cy + 4, 26, '#ffd9c8', 'MX', 'left', 0.8, 3);
+  if (!p.vazio) {
+    const n = p.n ?? 13, de = p.de ?? 0, passo = p.passo ?? 0.12;
+    for (let i = 0; i < n; i++) {
+      const lado = i < Math.ceil(n * 7 / 13) ? -1 : 1, k = lado < 0 ? i : i - Math.ceil(n * 7 / 13);
+      const d = R * (0.22 + k * 0.1), a = Math.PI / 2 + lado * (0.32 + (k % 2) * 0.12);
+      const bx = cx + Math.cos(a) * d + Math.sin(t * 1.3 + i) * 6, by = cy + Math.sin(a) * d + Math.cos(t * 1.1 + i) * 6;
+      const ap = ease((t - de - i * passo) / 0.15); if (ap <= 0) continue;
+      const ab = Math.atan2(by - cy, bx - cx), dif = ((ang - ab) % 6.283 + 6.283) % 6.283, br = Math.exp(-dif * 1.1);
+      const pulso = t - de - i * passo; if (pulso < 0.6) { ctx.strokeStyle = `rgba(${COR},${0.9 * (1 - pulso / 0.6)})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(bx, by, 10 + pulso * 70, 0, 6.283); ctx.stroke(); }
+      ctx.fillStyle = `rgba(255,${130 + br * 110},${100 + br * 90},${ap * (0.7 + br * 0.3)})`; ctx.shadowColor = `rgba(${COR},1)`; ctx.shadowBlur = 16; ctx.beginPath(); ctx.arc(bx, by, 13 + br * 8, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
+    }
+    if (p.rotulos) { const a = ease((t - de - n * passo) / 0.4); texto('7', cx - R * 0.55, cy + R * 0.62, 120, '#fff', 'MX', 'center', a); texto('6', cx + R * 0.55, cy + R * 0.62, 120, '#fff', 'MX', 'center', a); }
+  }
+  texto('RADAR DE BORDO · RECRIAÇÃO', cx, cy - R - 40, 24, `rgba(${COR},.7)`, 'MM', 'center', 1, 5);
+  if (p.legenda) texto(p.legenda, W / 2, VERT() ? H * 0.12 : 70, 52, '#ffb0a0', 'MX', 'center', fade(t, dur), 8);
+  vinheta(0.8); grao(t, 0.05);
+}
+
+// ---------- luz vermelha no céu noturno, vista da cabine ----------
+// p: apaga (s em que a luz some; sem ele, fica acesa)
+function luz(t, dur, p) {
+  fundo('#03050b', '#0a0f1c'); estrelas(t, 0.45, H);
+  const r = rng(77); ctx.fillStyle = 'rgba(25,32,52,.55)';
+  for (let i = 0; i < 9; i++) { const x = ((r() * W * 1.6 - t * (60 + r() * 60)) % (W * 1.6) + W * 1.6) % (W * 1.6) - W * 0.3, y = H * (0.2 + r() * 0.7); ctx.beginPath(); ctx.ellipse(x, y, 340 + r() * 300, 50 + r() * 50, 0, 0, 6.283); ctx.fill(); }
+  const x = W * 0.55 + Math.sin(t * 0.9) * 18, y = H * 0.4 + Math.cos(t * 0.7) * 10;
+  let k = 1; if (p.apaga != null) k = t < p.apaga ? 1 : Math.max(0, 1 - (t - p.apaga) / 0.08);
+  const pul = 0.85 + 0.15 * Math.sin(t * 9);
+  if (k > 0) { ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 260 * pul); g.addColorStop(0, `rgba(255,235,225,${k})`); g.addColorStop(0.08, `rgba(255,70,40,${0.95 * k})`); g.addColorStop(0.35, `rgba(220,20,10,${0.35 * k})`); g.addColorStop(1, 'rgba(120,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - 300, y - 300, 600, 600); ctx.restore(); }
+  // arco da canopy (fino, no canto) e painel escuro embaixo
+  ctx.strokeStyle = '#010102'; ctx.lineWidth = Math.min(W, H) * 0.035; ctx.beginPath(); ctx.moveTo(-40, H * 0.75); ctx.quadraticCurveTo(W * 0.05, H * 0.05, W * 0.45, -40); ctx.stroke();
+  ctx.fillStyle = '#010102'; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, H * 0.86); ctx.quadraticCurveTo(W * 0.5, H * 0.8, W, H * 0.86); ctx.lineTo(W, H); ctx.fill();
+  for (let i = 0; i < 5; i++) { ctx.fillStyle = `rgba(255,140,60,${0.25 + 0.2 * Math.sin(t * 3 + i)})`; ctx.fillRect(W * (0.2 + i * 0.14), H * 0.9, 18, 8); }
+  vinheta(0.9); grao(t, 0.06);
+}
+
+// ---------- radar do Mirage (tipo B: azimute x distância), um alvo ----------
+// p: fase ('zig' = alvo em zigue-zague se aproximando, 'foge' = acelera e some em p.tf s, 'vazio')
+function alvo(t, dur, p) {
+  fundo('#020904', '#000'); const VD = '110,255,150';
+  const w = Math.min(W * 0.86, H * 0.62), h = w * 1.15, x0 = (W - w) / 2, y0 = (H - h) / 2;
+  ctx.strokeStyle = `rgba(${VD},.35)`; ctx.lineWidth = 3; ctx.strokeRect(x0, y0, w, h);
+  ctx.lineWidth = 1.5; for (let k = 1; k < 4; k++) { ctx.beginPath(); ctx.moveTo(x0, y0 + h * k / 4); ctx.lineTo(x0 + w, y0 + h * k / 4); ctx.stroke(); }
+  ctx.setLineDash([6, 10]); ctx.beginPath(); ctx.moveTo(x0 + w / 2, y0); ctx.lineTo(x0 + w / 2, y0 + h); ctx.stroke(); ctx.setLineDash([]);
+  // varredura horizontal
+  const sx = x0 + w * (0.5 + 0.5 * Math.sin(t * 2.2)); const g = ctx.createLinearGradient(sx - 60, 0, sx, 0);
+  g.addColorStop(0, `rgba(${VD},0)`); g.addColorStop(1, `rgba(${VD},.22)`); ctx.fillStyle = g; ctx.fillRect(Math.max(x0, sx - 60), y0, 60, h);
+  ctx.fillStyle = `rgba(${VD},.9)`; ctx.beginPath(); ctx.moveTo(x0 + w / 2, y0 + h - 34); ctx.lineTo(x0 + w / 2 + 16, y0 + h - 8); ctx.lineTo(x0 + w / 2 - 16, y0 + h - 8); ctx.closePath(); ctx.fill();
+  if (p.fase !== 'vazio') {
+    let ax = x0 + w / 2 + Math.sin(t * 3.1) * w * 0.28, ay, a = 1, rastro = 0;
+    if (p.fase === 'foge') { const tf = p.tf ?? 1.2, k = Math.max(0, t - tf);
+      ay = y0 + h * 0.62 - k * k * h * 4.5; ax = x0 + w / 2 + Math.sin(tf * 3.1) * w * 0.28; rastro = Math.min(1, k * 3); a = ay < y0 ? 0 : 1; }
+    else ay = y0 + h * (0.12 + 0.5 * ease(t / Math.max(dur, 0.1)));
+    if (rastro && a) { ctx.strokeStyle = `rgba(${VD},.5)`; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ax, Math.min(y0 + h * 0.62, ay + 260)); ctx.stroke(); }
+    if (a) { ctx.save(); ctx.shadowColor = `rgba(${VD},1)`; ctx.shadowBlur = 25; ctx.fillStyle = '#d8ffe4'; ctx.fillRect(ax - 22, ay - 9, 44, 18); ctx.restore(); }
+  }
+  texto('RADAR DE BORDO · MIRAGE · RECRIAÇÃO', W / 2, y0 - 40, 24, `rgba(${VD},.7)`, 'MM', 'center', 1, 4);
+  if (p.legenda) texto(p.legenda, W / 2, y0 + h + 70, 54, '#9dffc4', 'MX', 'center', fade(t, dur), 6);
+  vinheta(0.75); grao(t, 0.05);
+}
+
+// ---------- velocidade: contador ou barras de comparação ----------
+// p: modo ('contador' até p.ate km/h, ou 'barras'), legenda
+function velocidade(t, dur, p) {
+  fundo('#07070a', '#000'); poeira(t, 30); const a = p.inicio ? Math.min(1, ease((dur - t) / 0.4)) : fade(t, dur, 0.4);
+  if (p.modo === 'barras') {
+    const itens = [['SOM', 1, '#9aa4b8'], ['CAÇA MIRAGE', 2.2, AMBAR], ['O OBJETO*', 15, VERMELHO]];
+    const bw = W * 0.8, x0 = W * 0.1, esc = bw / 15;
+    itens.forEach(([nome, m, cor], i) => { const y = H * 0.26 + i * H * 0.14, k = ease((t - 0.3 - i * 0.5) / 0.9);
+      texto(nome, x0, y - 50, 44, '#fff', 'MX', 'left', a * ease((t - i * 0.5) / 0.3), 3);
+      ctx.globalAlpha = a; ctx.fillStyle = cor; ctx.fillRect(x0, y, esc * m * k, 56); ctx.globalAlpha = 1;
+      texto('MACH ' + String(Math.round(m * k * 10) / 10).replace('.', ','), x0, y + 100, 48, cor, 'MX', 'left', a * k, 2); });
+    texto('* estimativa do piloto', W / 2, H * 0.68, 30, 'rgba(255,255,255,.6)', 'MM', 'center', a, 2);
+  } else {
+    const ate = p.ate ?? 18375, k = ease(t / Math.max(0.5, dur * 0.7)), i0 = p.inicio ?? 0, v = Math.round(ate * (i0 + (1 - i0) * k * k));
+    texto(v.toLocaleString('pt-BR'), W / 2, H / 2 - 40, VERT() ? 190 : 220, '#fff', 'MX', 'center', a);
+    texto('km/h', W / 2, H / 2 + 90, 64, AMBAR, 'MX', 'center', a, 10);
+    if (k > 0.98) texto('MACH 15', W / 2, H / 2 + 200, 80, VERMELHO, 'MX', 'center', a * ease((t - dur * 0.7) / 0.3), 8);
+  }
+  if (p.legenda) texto(p.legenda, W / 2, VERT() ? H * 0.16 : 90, 48, AMBAR, 'MX', 'center', a, 6);
+  vinheta(0.85); grao(t, 0.05);
+}
+
+// ---------- rota Rio -> São Paulo com cronômetro ----------
+function rota(t, dur, p) {
+  fundo('#05080f', '#010204'); estrelas(t, 0.25, H);
+  const sp = [W * 0.2, H * 0.6], rj = [W * 0.8, H * 0.42], k = ease((t - 0.4) / Math.max(0.5, dur - 1.2));
+  ctx.strokeStyle = 'rgba(170,200,240,.35)'; ctx.setLineDash([12, 14]); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(...rj); ctx.lineTo(...sp); ctx.stroke(); ctx.setLineDash([]);
+  [[sp, 'SÃO PAULO'], [rj, 'RIO']].forEach(([[x, y], n]) => { ctx.fillStyle = VERMELHO; ctx.beginPath(); ctx.arc(x, y, 14, 0, 6.283); ctx.fill(); texto(n, x, y + 60, 46, '#fff', 'MX', 'center', 1, 4); });
+  const x = rj[0] + (sp[0] - rj[0]) * k, y = rj[1] + (sp[1] - rj[1]) * k;
+  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = 'rgba(255,120,60,.8)'; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(rj[0] + (sp[0] - rj[0]) * Math.max(0, k - 0.25), rj[1] + (sp[1] - rj[1]) * Math.max(0, k - 0.25)); ctx.lineTo(x, y); ctx.stroke();
+  const g = ctx.createRadialGradient(x, y, 0, x, y, 60); g.addColorStop(0, '#fff'); g.addColorStop(0.3, 'rgba(255,90,40,.8)'); g.addColorStop(1, 'rgba(255,40,0,0)'); ctx.fillStyle = g; ctx.fillRect(x - 60, y - 60, 120, 120); ctx.restore();
+  const s = Math.round(70 * k); texto(`${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`, W / 2, H * 0.25, 150, '#fff', 'MAQ', 'center', 1, 6);
+  texto('~360 KM · A 18 MIL KM/H', W / 2, H * 0.68, 40, AMBAR, 'MX', 'center', ease((t - 0.3) / 0.4), 4);
+  vinheta(0.8); grao(t, 0.05);
+}
+
+// ---------- floresta à noite com fogueiras que se apagam (Fawcett) ----------
+// p: n (fogueiras), apagar (s em que começam a se apagar, uma a uma), legenda
+function fogueiras(t, dur, p) {
+  fundo('#03060a', '#081018'); estrelas(t, 0.6, H * 0.55);
+  const hz = H * (VERT() ? 0.56 : 0.62), r = rng(31), amp = VERT() ? 2.4 : 1;
+  { const g = ctx.createLinearGradient(0, hz - H * 0.35, 0, hz); g.addColorStop(0, 'rgba(40,60,95,0)'); g.addColorStop(1, 'rgba(50,75,115,.45)'); ctx.fillStyle = g; ctx.fillRect(0, hz - H * 0.35, W, H * 0.35); }
+  // copas das árvores em camadas
+  [['#020405', 0.0, 1.0], ['#04080a', 0.05, 0.7]].forEach(([cor, dy, esc], k) => { ctx.fillStyle = cor; ctx.beginPath(); ctx.moveTo(0, H);
+    for (let x = 0; x <= W + 40; x += 30) ctx.lineTo(x, hz - dy * H - (60 + 50 * Math.sin(x / 90 + k * 3) + 30 * Math.abs(Math.sin(x / 23 + k)) + 25 * Math.abs(Math.sin(x / 9 + k * 5))) * esc * amp); ctx.lineTo(W, H); ctx.fill(); });
+  const n = p.n ?? 3;
+  for (let i = 0; i < n; i++) { const x = W * (0.18 + i * 0.64 / Math.max(1, n - 1)), y = hz + H * (0.14 + (i % 2) * 0.08);
+    const ap = p.apagar == null ? 1 : clamp(1 - (t - p.apagar - i * 0.9) / 0.5, 0, 1); if (ap <= 0) continue;
+    const fl = 0.8 + 0.2 * Math.sin(t * 13 + i * 2) * Math.sin(t * 7.3 + i);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 130 * fl * ap); g.addColorStop(0, `rgba(255,200,120,${0.9 * ap})`); g.addColorStop(0.15, `rgba(255,120,40,${0.5 * ap})`); g.addColorStop(1, 'rgba(255,60,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - 240, y - 240, 480, 480); ctx.restore();
+    for (let k = 0; k < 6; k++) { const ty = (t * 60 + k * 37 + i * 11) % 160; ctx.fillStyle = `rgba(255,180,90,${(1 - ty / 160) * 0.7 * ap})`; ctx.fillRect(x + Math.sin(t * 3 + k) * 20, y - 20 - ty, 3, 3); } }
+  if (p.legenda) texto(p.legenda, W / 2, VERT() ? H * 0.16 : 90, 48, AMBAR, 'MX', 'center', fade(t, dur), 6);
+  vinheta(0.85); grao(t, 0.06);
+}
+
+// ---------- foto P&B recriada: pico da ilha e objeto oval com anel (Ilha da Trindade, 1958) ----------
+// p: k (0..1 posição do objeto na sequência), sem (sem objeto), flash (disparo no início), num (rótulo da foto), pronto (sem fade de entrada)
+function foto_disco(t, dur, p) {
+  fundo('#0a0a0a', '#000'); const a = p.pronto ? Math.min(1, ease((dur - t) / 0.3)) : fade(t, dur, 0.3), s = 1 + t * 0.015;
+  const fw = Math.min(W * 0.78, H * 0.62), fh = fw, cx = W / 2, cy = H / 2;
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.rotate(-0.015); ctx.globalAlpha = a;
+  ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 50; ctx.fillStyle = '#e8e4da'; ctx.fillRect(-fw / 2 - 24, -fh / 2 - 24, fw + 48, fh + 90); ctx.shadowColor = 'transparent';
+  ctx.beginPath(); ctx.rect(-fw / 2, -fh / 2, fw, fh); ctx.clip();
+  const g = ctx.createLinearGradient(0, -fh / 2, 0, fh / 2); g.addColorStop(0, '#b9b9b6'); g.addColorStop(1, '#8e8e8a'); ctx.fillStyle = g; ctx.fillRect(-fw / 2, -fh / 2, fw, fh);
+  // nuvens suaves
+  ctx.filter = 'blur(22px)'; const r = rng(9); for (let i = 0; i < 7; i++) { ctx.fillStyle = `rgba(230,230,226,${0.25 + r() * 0.25})`; ctx.beginPath(); ctx.ellipse(-fw / 2 + r() * fw, -fh / 2 + r() * fh * 0.4, 120 + r() * 160, 30 + r() * 30, 0, 0, 6.283); ctx.fill(); } ctx.filter = 'none';
+  // pico da ilha (rocha escura) e mar
+  ctx.fillStyle = '#2b2b2a'; ctx.beginPath(); ctx.moveTo(-fw / 2, fh * 0.32);
+  const pts = [[-0.5, 0.2], [-0.32, 0.05], [-0.18, -0.08], [-0.08, -0.22], [0.0, -0.12], [0.1, -0.02], [0.25, 0.08], [0.4, 0.16], [0.5, 0.2]];
+  pts.forEach(([x, y]) => ctx.lineTo(x * fw, y * fh)); ctx.lineTo(fw / 2, fh * 0.32); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#5d5d5a'; ctx.fillRect(-fw / 2, fh * 0.3, fw, fh * 0.2);
+  if (!p.sem) { const k = p.k ?? 0.5, ox = (-0.32 + k * 0.6) * fw, oy = (-0.34 + Math.sin(k * 3) * 0.05) * fh, ow = fw * 0.13;
+    ctx.save(); ctx.translate(ox, oy); ctx.rotate(-0.12); ctx.filter = 'blur(2.5px)';
+    ctx.fillStyle = '#3a3a38'; ctx.beginPath(); ctx.ellipse(0, 0, ow, ow * 0.32, 0, 0, 6.283); ctx.fill();
+    ctx.strokeStyle = '#d6d6d2'; ctx.lineWidth = ow * 0.08; ctx.beginPath(); ctx.ellipse(0, 0, ow * 1.15, ow * 0.18, 0, 0, 6.283); ctx.stroke();
+    ctx.fillStyle = 'rgba(40,40,38,.6)'; ctx.beginPath(); ctx.ellipse(0, 0, ow * 1.3, ow * 0.45, 0, 0, 6.283); ctx.fill(); ctx.filter = 'none'; ctx.restore(); }
+  // grão de filme
+  const rg = rng(1 + Math.floor(t * 24)); ctx.fillStyle = 'rgba(0,0,0,.18)'; for (let i = 0; i < 900; i++) ctx.fillRect(-fw / 2 + rg() * fw, -fh / 2 + rg() * fh, 2, 2);
+  ctx.restore();
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.globalAlpha = a; ctx.fillStyle = '#333'; ctx.font = `${Math.round(fw * 0.045)}px MAO`; ctx.textAlign = 'left';
+  ctx.fillText(p.num || 'Trindade · 16/01/1958 · recriação', -fw / 2, fh / 2 + 45); ctx.restore();
+  if (p.flash && t < 0.25) { ctx.fillStyle = `rgba(255,255,255,${1 - t / 0.25})`; ctx.fillRect(0, 0, W, H); }
+  vinheta(0.8); grao(t, 0.05);
+}
+
+// ---------- paredão de rocha com gravuras (itacoatiaras, Pedra do Ingá) — ilustração, símbolos inventados ----------
+// p: luz (luz rasante varrendo a pedra), sol (sombra de calendário girando), ceu (céu noturno com Órion ligando pontos), zoom
+function itacoatiara(t, dur, p) {
+  fundo('#1b140f', '#0b0806'); const z = 1 + (p.zoom ?? 0.06) * t / Math.max(dur, 0.1);
+  ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(z, z); ctx.translate(-W / 2, -H / 2);
+  const x0 = -W * 0.1, x1 = W * 1.1, y0 = H * (VERT() ? 0.2 : 0.3), y1 = H * (VERT() ? 0.8 : 0.72), sg = VERT() ? 1.7 : 1;
+  const g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, '#5a4a3c'); g.addColorStop(1, '#3a2f26'); ctx.fillStyle = g;
+  ctx.beginPath(); ctx.moveTo(x0, y0 + 30); for (let x = x0; x <= x1; x += 40) ctx.lineTo(x, y0 + Math.sin(x / 130) * 18); ctx.lineTo(x1, y1); ctx.lineTo(x0, y1); ctx.fill();
+  // textura da rocha
+  const r = rng(71); for (let i = 0; i < 900; i++) { ctx.fillStyle = `rgba(${r() > 0.5 ? '20,15,10' : '120,100,80'},${0.08 + r() * 0.12})`; ctx.fillRect(x0 + r() * (x1 - x0), y0 + r() * (y1 - y0), 2 + r() * 6, 1 + r() * 3); }
+  // gravuras: linha ondulada, fileira de cúpulas embaixo, espirais e figuras
+  const rr = rng(5), cor = 'rgba(15,10,6,.85)', luzc = 'rgba(210,180,140,.35)';
+  ctx.lineCap = 'round';
+  const desenha = (fn) => { ctx.strokeStyle = luzc; ctx.lineWidth = 9; ctx.save(); ctx.translate(2, 2); fn(); ctx.restore(); ctx.strokeStyle = cor; ctx.lineWidth = 7; fn(); };
+  const ym = y0 + (y1 - y0) * 0.55;
+  desenha(() => { ctx.beginPath(); for (let x = x0 + 60; x < x1 - 60; x += 10) ctx.lineTo(x, ym + Math.sin(x / 38) * 14); ctx.stroke(); });
+  for (let x = x0 + 80; x < x1 - 60; x += 34) { ctx.fillStyle = cor; ctx.beginPath(); ctx.arc(x, ym + 48, 7, 0, 6.283); ctx.fill(); }
+  for (let i = 0; i < (VERT() ? 34 : 26); i++) { const cx = x0 + 100 + rr() * (x1 - x0 - 200), cy = y0 + 70 * sg + rr() * (ym - y0 - 130 * sg), tipo = Math.floor(rr() * 5), s = (22 + rr() * 22) * sg;
+    desenha(() => { ctx.beginPath();
+      if (tipo === 0) { for (let a = 0; a < 12; a += 0.2) { const rad = s * a / 12; ctx.lineTo(cx + Math.cos(a) * rad, cy + Math.sin(a) * rad); } }
+      else if (tipo === 1) { ctx.arc(cx, cy, s * 0.7, 0, 6.283); ctx.moveTo(cx + s * 0.25, cy); ctx.arc(cx, cy, s * 0.25, 0, 6.283); }
+      else if (tipo === 2) { ctx.moveTo(cx, cy - s); ctx.lineTo(cx, cy + s); ctx.moveTo(cx - s * 0.6, cy - s * 0.3); ctx.lineTo(cx, cy); ctx.lineTo(cx + s * 0.6, cy - s * 0.3); ctx.moveTo(cx - s * 0.5, cy + s); ctx.lineTo(cx, cy + s * 0.5); ctx.lineTo(cx + s * 0.5, cy + s); }
+      else if (tipo === 3) { ctx.moveTo(cx - s, cy); ctx.quadraticCurveTo(cx, cy - s * 1.4, cx + s, cy); ctx.quadraticCurveTo(cx, cy + s * 1.4, cx - s, cy); }
+      else { ctx.moveTo(cx - s, cy - s * 0.5); ctx.lineTo(cx + s, cy - s * 0.5); ctx.moveTo(cx - s, cy + s * 0.5); ctx.lineTo(cx + s, cy + s * 0.5); ctx.moveTo(cx, cy - s); ctx.lineTo(cx, cy + s); }
+      ctx.stroke(); }); }
+  ctx.restore();
+  if (p.luz) { const lx = W * (-0.3 + 1.6 * (t / Math.max(dur, 0.1))); const lg = ctx.createRadialGradient(lx, H * 0.5, 0, lx, H * 0.5, W * 0.5);
+    lg.addColorStop(0, 'rgba(255,200,130,.35)'); lg.addColorStop(1, 'rgba(255,200,130,0)'); ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+  if (p.sol) { const a = -0.9 + 1.8 * t / Math.max(dur, 0.1); ctx.save(); ctx.translate(W / 2, H * 0.72); ctx.rotate(a); ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.fillRect(-14, -H * 0.42, 28, H * 0.42); ctx.restore();
+    texto('☀', W / 2 - Math.sin(a) * W * 0.4, H * 0.14, 70, '#ffcf70', 'MX', 'center', 1); }
+  if (p.ceu) { ctx.fillStyle = 'rgba(2,4,12,.72)'; ctx.fillRect(0, 0, W, H); estrelas(t, 0.8, H);
+    const O = [[0.36, 0.25], [0.64, 0.28], [0.43, 0.45], [0.5, 0.465], [0.57, 0.48], [0.38, 0.68], [0.63, 0.66]], k = ease((t - 0.3) / 1.2);
+    ctx.strokeStyle = `rgba(160,200,255,${0.6 * k})`; ctx.lineWidth = 3; ctx.beginPath(); [[0, 1], [0, 2], [1, 4], [2, 3], [3, 4], [2, 5], [4, 6], [5, 6]].forEach(([a, b]) => { ctx.moveTo(O[a][0] * W, O[a][1] * H); ctx.lineTo(O[b][0] * W, O[b][1] * H); }); ctx.stroke();
+    O.forEach(([x, y]) => { ctx.fillStyle = '#e8f0ff'; ctx.beginPath(); ctx.arc(x * W, y * H, 9, 0, 6.283); ctx.fill(); });
+    texto('ÓRION', W / 2, H * (VERT() ? 0.16 : 0.85), 60, '#cfe0ff', 'MX', 'center', k, 10); }
+  vinheta(0.8); grao(t, 0.05);
+}
+
 window.tamanho = (w, h) => { W = w; H = h; cv.width = w; cv.height = h; };
 const CENAS = { morro, mascara, bilhete, caderno, mapa, relogio, data: data_, capitulo, citacao, ficha, documento, jornal, perguntas, teoria, rua, estrada, eletronica, dinheiro, final: final_,
-  brasil, radar, cacas, vila, ilha, cobra, fordlandia, meteoro, pedra, cranio, museu, praia, fragmentos, criatura, fotos };
+  brasil, radar, cacas, vila, ilha, cobra, fordlandia, meteoro, pedra, cranio, museu, praia, fragmentos, criatura, fotos, escolta, luz, alvo, velocidade, rota, fogueiras, foto_disco, itacoatiara };
 window.desenhar = (nome, t, dur, p) => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.lineCap = 'butt'; ctx.setLineDash([]); CENAS[nome](t, dur, p || {}); };
 </script>
 </body></html>

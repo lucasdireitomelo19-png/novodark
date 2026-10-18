@@ -153,6 +153,8 @@ for i, c in enumerate(CENAS):
     out = os.path.join(TMP, f"parte_{i:03d}.mp4")
     partes.append(out)
     chave = json.dumps({k: v for k, v in c.items() if k not in ("texto", "tag", "credito")}, sort_keys=True) + f"{dur:.3f}"
+    if c.get("_arq") and os.path.exists(c["_arq"]):  # animação refeita (anim.html mudou) também refaz o plano
+        chave += f"|{os.path.getmtime(c['_arq']):.0f}"
     if os.path.exists(out) and os.path.exists(out + ".key") and open(out + ".key").read() == chave:
         continue
     anim = c["src"].startswith("anim:")
@@ -184,6 +186,9 @@ for i, c in enumerate(CENAS):
     if banco:
         f.append(f"setsar=1,fps={FPS},eq=contrast=1.12:brightness=-0.07:saturation={c.get('sat', 0.72)}:gamma=0.92,"
                  "colorbalance=rs=-0.05:bs=0.08:rh=0.06:bh=-0.04")
+        if c.get("noite"):  # "noite americana": footage de dia vira noite (escuro, azulado, dessaturado)
+            f.append("eq=brightness=-0.04:gamma=0.85:saturation=0.5,colorbalance=rs=-0.1:gs=-0.03:bs=0.18:rm=-0.06:bm=0.1,"
+                     "curves=all='0/0 0.5/0.38 1/0.85'")
     else:
         f.append(f"setsar=1,fps={FPS}" + ("" if anim else f",eq=contrast=1.06:saturation={c.get('sat', 1.12)}"))
     if c.get("flash"):
@@ -213,7 +218,7 @@ grupos, atual = [], []
 for k, p in enumerate(palavras):
     atual.append(p)
     prox = palavras[k + 1] if k + 1 < len(palavras) else None
-    pausa = prox is None or prox["t"] - (p["t"] + p["d"]) > 0.25
+    pausa = prox is None or prox["t"] - (p["t"] + p["d"]) > 0.25 or p.get("fim")
     longo = prox is not None and sum(len(x["w"]) + 1 for x in atual) + len(prox["w"]) > (22 if VERT else 38)
     if pausa or longo or len(atual) >= (4 if VERT else 7):
         grupos.append(atual); atual = []
@@ -365,12 +370,14 @@ run(["ffmpeg", "-v", "error", "-y", "-i", bruto, "-i", os.path.join(pasta, "narr
      "[1:a]aresample=48000,highpass=f=75,equalizer=f=170:t=q:w=1:g=2.5,equalizer=f=3200:t=q:w=1.4:g=2,"
      "acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120:makeup=2,"
      "aecho=0.9:0.6:35|60:0.10|0.06,aformat=channel_layouts=stereo,"
-     f"apad,atrim=0:{FIM},loudnorm=I=-16:TP=-2:LRA=11[voz];"
+     # loudnorm segura ~3 s de análise e não devolve o fim do áudio: por isso a voz e a mixagem
+     # entram com 5 s de silêncio a mais e são cortadas no tamanho certo depois
+     f"apad,atrim=0:{FIM + 5},loudnorm=I=-16:TP=-2:LRA=11,aresample=48000,atrim=0:{FIM}[voz];"
      "[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.5[bg];"
-     "[voz][bg]amix=inputs=2:normalize=0:duration=first,"
-     f"loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=disabled[a];"
+     "[voz][bg]amix=inputs=2:normalize=0:duration=longest,"
+     f"apad=pad_dur=5,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.84:level=disabled,atrim=0:{FIM}[a];"
      f"[0:v]vignette=angle=0.5,noise=alls=4:allf=t,ass={ass_path}:fontsdir={FONTS},"
-     f"fade=t=in:d=0.4,fade=t=out:st={FIM - 1.0}:d=1.0,trim=0:{FIM}[v]",
+     + ("" if VERT else "fade=t=in:d=0.4,") + f"fade=t=out:st={FIM - 1.0}:d=1.0,trim=0:{FIM}[v]",
      "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
      "-r", str(FPS), "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-t", f"{FIM}",
      "-movflags", "+faststart", saida])
