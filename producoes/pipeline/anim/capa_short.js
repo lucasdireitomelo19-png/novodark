@@ -11,8 +11,14 @@ const lista = JSON.parse(fs.readFileSync(path.join(pasta, 'capas.json'), 'utf8')
   await pg.evaluate(() => Promise.all([...document.fonts].map(f => f.load())));
   await pg.evaluate(() => window.tamanho(1080, 1920));
   for (const th of lista) {
-    await pg.evaluate((th) => {
-      window.desenhar(th.cena, th.t ?? 4, 8, th.p || {});
+    // "foto": caminho de uma imagem (relativo à pasta do vídeo) usada como fundo, em vez de uma cena animada
+    const foto = th.foto ? 'data:image/jpeg;base64,' + fs.readFileSync(path.resolve(pasta, th.foto)).toString('base64') : null;
+    await pg.evaluate(async ([th, foto]) => {
+      if (foto) { const img = new Image(); img.src = foto; await img.decode();
+        const c0 = document.getElementById('c').getContext('2d'), esc = Math.max(1080 / img.width, 1920 / img.height) * (th.zoom || 1);
+        const w = img.width * esc, h = img.height * esc, px = th.px ?? 0.5;
+        c0.fillStyle = '#000'; c0.fillRect(0, 0, 1080, 1920); c0.drawImage(img, (1080 - w) * px, (1920 - h) / 2, w, h); }
+      else window.desenhar(th.cena, th.t ?? 4, 8, th.p || {});
       const c = document.getElementById('c').getContext('2d');
       const dy = th.pos === 'baixo' ? 1080 : 0;  // "pos": "baixo" põe o texto na parte de baixo (quando o desenho ocupa o topo)
       const g = th.pos === 'baixo' ? c.createLinearGradient(0, 1920, 0, 1100) : c.createLinearGradient(0, 0, 0, 760);
@@ -22,7 +28,7 @@ const lista = JSON.parse(fs.readFileSync(path.join(pasta, 'capas.json'), 'utf8')
       caber(th.l1, 150); c.fillStyle = '#fff'; c.fillText(th.l1, 540, 380 + dy);
       caber(th.l2, 150); c.fillStyle = '#e0262b'; c.fillText(th.l2, 540, 540 + dy);
       c.shadowBlur = 0; c.font = '44px MX'; c.fillStyle = '#ffb347'; c.letterSpacing = '6px'; c.fillText(th.tag, 540, 640 + dy);
-    }, th);
+    }, [th, foto]);
     await pg.locator('#c').screenshot({ path: path.join(pasta, `${th.nome}.jpg`), type: 'jpeg', quality: 92 });
   }
   await b.close(); })();

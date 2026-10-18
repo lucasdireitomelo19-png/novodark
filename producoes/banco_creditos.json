@@ -455,6 +455,70 @@
   "licenca": "pixabay",
   "pagina": "https://pixabay.com/videos/id-205415/"
  },
+ "b_s15_acude_seco.mp4": {
+  "autor": "Amirirani",
+  "credito": "Vídeo: Amirirani / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:89833",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-89833/"
+ },
+ "b_s15_barragem.mp4": {
+  "autor": "AHAHase",
+  "credito": "Vídeo: AHAHase / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:203928",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-203928/"
+ },
+ "b_s15_fogo.mp4": {
+  "autor": "Christopher_OToole_Images",
+  "credito": "Vídeo: Christopher_OToole_Images / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:21531",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-21531/"
+ },
+ "b_s15_igreja_noite.mp4": {
+  "autor": "Whitechappel79",
+  "credito": "Vídeo: Whitechappel79 / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:74014",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-74014/"
+ },
+ "b_s15_lama.mp4": {
+  "autor": "Amirirani",
+  "credito": "Vídeo: Amirirani / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:89769",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-89769/"
+ },
+ "b_s15_livro.mp4": {
+  "autor": "TungArt7",
+  "credito": "Vídeo: TungArt7 / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:207982",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-207982/"
+ },
+ "b_s15_represa.mp4": {
+  "autor": "AdeoluwaThanni",
+  "credito": "Vídeo: AdeoluwaThanni / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:330293",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-330293/"
+ },
+ "b_s15_rio_seco.mp4": {
+  "autor": "Amirirani",
+  "credito": "Vídeo: Amirirani / Pixabay",
+  "fonte": "pixabay",
+  "id": "pixabay:video:89835",
+  "licenca": "pixabay",
+  "pagina": "https://pixabay.com/videos/id-89835/"
+ },
  "b_silhueta.jpg": {
   "autor": "frank mckenna",
   "credito": "Imagem: stocksnap (CC0)",
@@ -463,6 +527,91 @@
   "licenca": "cc0",
   "pagina": "https://stocksnap.io/photo/silhouette-sun-RLCZEYZLQB",
   "titulo": "Silhouette Sun"
+ },
+ "w_canudos_batalhao.jpg": {
+  "credito": "Foto de 1897 / Wikimedia Commons (domínio público)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:40th infantry batallion canudos 1897.jpg",
+  "licenca": "domínio público",
+  "pagina": "https://commons.wikimedia.org/wiki/File:40th_infantry_batallion_canudos_1897.jpg"
+ },
+ "w_canudos_igreja_1897.jpg": {
+  "credito": "Foto de 1897 / Wikimedia Commons (domínio público)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Ruins church in canudos 1897.jpg",
+  "licenca": "domínio público",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Ruins_church_in_canudos_1897.jpg"
+ },
+ "w_canudos_planta.jpg": {
+  "credito": "Planta de 1897, Siqueira Menezes / Wikimedia Commons (domínio público)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Planta de Canudos Siqueira Menezes.jpg",
+  "licenca": "domínio público",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Planta_de_Canudos_Siqueira_Menezes.jpg"
+ },
+ "w_canudos_prisioneiros.jpg": {
+  "credito": "Foto de 1897 / Wikimedia Commons (domínio público)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Canudos rebels.jpg",
+  "licenca": "domínio público",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Canudos_rebels.jpg"
+ },
+ "w_canudos_ruinas_1.jpg": {
+  "credito": "Foto: Rita Barreto / Bahiatursa / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:XXX Celebração Popular de Canudos (Ruinas e Seca no Açude). Foto Rita Barreto - Bahiatursa (10157832744).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:XXX_Celebra%C3%A7%C3%A3o_Popular_de_Canudos_%28Ruinas_e_Seca_no_A%C3%A7ude%29._Foto_Rita_Barreto_-_Bahiatursa_%2810157832744%29.jpg"
+ },
+ "w_canudos_ruinas_2.jpg": {
+  "credito": "Foto: Rita Barreto / Bahiatursa / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:XXX Celebração Popular de Canudos (Ruinas e Seca no Açude). Foto Rita Barreto - Bahiatursa (10157917185).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:XXX_Celebra%C3%A7%C3%A3o_Popular_de_Canudos_%28Ruinas_e_Seca_no_A%C3%A7ude%29._Foto_Rita_Barreto_-_Bahiatursa_%2810157917185%29.jpg"
+ },
+ "w_canudos_ruinas_3.jpg": {
+  "credito": "Foto: Rita Barreto / Bahiatursa / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:XXX Celebração Popular de Canudos (Ruinas e Seca no Açude). Foto Rita Barreto - Bahiatursa (10157922225).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:XXX_Celebra%C3%A7%C3%A3o_Popular_de_Canudos_%28Ruinas_e_Seca_no_A%C3%A7ude%29._Foto_Rita_Barreto_-_Bahiatursa_%2810157922225%29.jpg"
+ },
+ "w_canudos_ruinas_4.jpg": {
+  "credito": "Foto: Rita Barreto / Bahiatursa / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:XXX Celebração Popular de Canudos (Ruinas e Seca no Açude). Foto Rita Barreto - Bahiatursa (10157923985).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:XXX_Celebra%C3%A7%C3%A3o_Popular_de_Canudos_%28Ruinas_e_Seca_no_A%C3%A7ude%29._Foto_Rita_Barreto_-_Bahiatursa_%2810157923985%29.jpg"
+ },
+ "w_canudos_ruinas_5.jpg": {
+  "credito": "Foto: Rita Barreto / Bahiatursa / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:XXX Celebração Popular de Canudos (Ruinas e Seca no Açude). Foto Rita Barreto - Bahiatursa (10158062833).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:XXX_Celebra%C3%A7%C3%A3o_Popular_de_Canudos_%28Ruinas_e_Seca_no_A%C3%A7ude%29._Foto_Rita_Barreto_-_Bahiatursa_%2810158062833%29.jpg"
+ },
+ "w_canudos_seca.jpg": {
+  "credito": "Foto: Ricardo Delegado / Wikimedia Commons (CC BY-SA 3.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Marcas da seca no sertão da Bahia - Canudos.jpg",
+  "licenca": "cc by-sa 3.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Marcas_da_seca_no_sert%C3%A3o_da_Bahia_-_Canudos.jpg"
+ },
+ "w_canudos_vila.jpg": {
+  "autor": "Unknown authorUnknown author",
+  "credito": "Foto de 1897 / Wikimedia Commons (domínio público)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Canudos village.jpg",
+  "licenca": "public domain",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Canudos_village.jpg"
+ },
+ "w_cocorobo_barragem.jpg": {
+  "credito": "Foto: A. Duarte / Wikimedia Commons (CC BY-SA 2.0)",
+  "fonte": "wikimedia commons",
+  "id": "commons:File:Dam Cocorobó Açude Cocorobó (23798031281).jpg",
+  "licenca": "cc by-sa 2.0",
+  "pagina": "https://commons.wikimedia.org/wiki/File:Dam_Cocorob%C3%B3_A%C3%A7ude_Cocorob%C3%B3_%2823798031281%29.jpg"
  },
  "w_inga_1.jpg": {
   "autor": "Marinelson Almeida",

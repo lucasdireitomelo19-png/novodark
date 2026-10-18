@@ -6,3 +6,4 @@ __pycache__/
 videos/*/__pycache__/
 pipeline/sfx/
 videos/*/narracao_final.wav
+banco_creditos.json.lock

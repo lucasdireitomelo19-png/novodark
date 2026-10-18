@@ -309,7 +309,7 @@ for k, c in enumerate(ORIG):
     nome = c["src"][5:] if c["src"].startswith("anim:") else ""
     pp = c.get("p", {})
     # transição: whoosh em toda troca de cena
-    if k and nome != "capitulo":
+    if k and nome != "capitulo" and getattr(cfg, "WHOOSH", True):  # WHOOSH = False no cenas.py: corte seco, sem whoosh automático
         tocar(["whoosh", "whoosh_curto", "whoosh_grave"][k % 3], t0 - 0.35, -15 if VERT else -17)
     if nome == "capitulo":
         tocar("riser", t0 - 3.0, -14); tocar("impacto", t0 - 0.02, -6)
@@ -343,6 +343,8 @@ for k, c in enumerate(ORIG):
         tocar("fogo", t0, -20, dur)
     for (nm, off, db) in c.get("sfx", []):  # efeitos pedidos à mão no cenas.py
         tocar(nm, t0 + off, db)
+    if c.get("ambiente"):  # ambiente em loop por toda a cena: ("vento", -24)
+        nm, db = c["ambiente"]; tocar(nm, t0, db, dur)
 if getattr(cfg, "FINAL", ""):
     fv = palavras[-1]["t"] + palavras[-1]["d"]
     tocar("riser", fv - 2.8, -14); tocar("impacto", fv + 0.2, -5)
@@ -355,6 +357,11 @@ bl = int(SR * 0.05); rms = np.sqrt(np.convolve(voz ** 2, np.ones(bl) / bl, mode=
 fala = np.clip(rms / (np.percentile(rms[rms > 1e-4], 60) + 1e-9), 0, 1)
 fala = np.convolve(fala, np.ones(int(SR * 0.3)) / int(SR * 0.3), mode="same")
 ganho = 1.0 - 0.55 * fala
+# silencio=1 numa cena: a trilha some 1 s antes dela e volta devagar (respiro antes de uma revelação)
+for c in ORIG:
+    if c.get("silencio"):
+        a, b = int(max(0, c["t"] - 1.0) * SR), int(c["t"] * SR); f = int(1.5 * SR)
+        ganho[a:b] *= np.linspace(1, 0, b - a) if b > a else 1; ganho[b:b + f] *= np.linspace(0, 1, min(f, max(0, N - b)))
 trilha = som(getattr(cfg, "TRILHA", "drone")); trilha = np.tile(trilha, (N // len(trilha) + 1, 1))[:N].copy()
 trilha *= (10 ** (getattr(cfg, "TRILHA_DB", -21) / 20)) * ganho[:, None]
 f = int(SR * 3); trilha[-f:] *= np.linspace(1, 0, f)[:, None]

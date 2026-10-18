@@ -1,0 +1,10 @@
+[
+ {"id": "c01", "texto": "Existe uma cidade no sertão da Bahia que só aparece quando a água vai embora.", "pausa": 0.35, "vel": -3, "tom": -1},
+ {"id": "c02", "texto": "Em mil oitocentos e noventa e sete, ali ficava Canudos. Um arraial de milhares de sertanejos, guiados pelo pregador Antônio Conselheiro.", "pausa": 0.3},
+ {"id": "c03", "texto": "A República mandou o Exército. Três expedições foram derrotadas. A quarta chegou com quase dez mil soldados.", "pausa": 0.3, "vel": 3},
+ {"id": "c04", "texto": "Em outubro, Canudos foi arrasada, casa por casa. As estimativas falam em quinze a trinta mil mortos.", "pausa": 0.35},
+ {"id": "c05", "texto": "Euclides da Cunha escreveu: Canudos não se rendeu.", "pausa": 0.5, "vel": -5, "tom": -1},
+ {"id": "c06", "texto": "Os sobreviventes reconstruíram a vila. Mas, no fim dos anos sessenta, o governo terminou um açude bem ali. E a nova Canudos foi coberta pela água.", "pausa": 0.4},
+ {"id": "c07", "texto": "Nos anos noventa, uma seca baixou o nível do açude. E as ruínas voltaram. As paredes da igreja. O cemitério.", "pausa": 0.45, "vel": -2},
+ {"id": "c08", "texto": "Desde então, toda vez que a seca aperta, Canudos volta à superfície. Como se a cidade ainda se recusasse a desaparecer.", "pausa": 0, "vel": -4, "tom": -1}
+]

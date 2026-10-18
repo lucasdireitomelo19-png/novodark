@@ -9,7 +9,7 @@ Precisa de PIXABAY_API_KEY no ambiente (arquivo .env na raiz, nunca no código).
 
 Arquivos começam com "b_" para o motor aplicar o tratamento de cor, a etiqueta IMAGEM ILUSTRATIVA e o crédito.
 """
-import json, os, sys, urllib.parse, urllib.request
+import fcntl, json, os, sys, urllib.parse, urllib.request
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(BASE, "src")
@@ -35,6 +35,13 @@ def baixar_url(url, destino):
 
 
 def registrar(nome, id_, autor, pagina, tipo):
+    # trava: vários downloads em paralelo escrevem no mesmo arquivo de créditos
+    with open(CRED + ".lock", "w") as trava:
+        fcntl.flock(trava, fcntl.LOCK_EX)
+        _registrar(nome, id_, autor, pagina, tipo)
+
+
+def _registrar(nome, id_, autor, pagina, tipo):
     c = json.load(open(CRED, encoding="utf-8")) if os.path.exists(CRED) else {}
     c[nome] = {"id": f"pixabay:{tipo}:{id_}", "credito": f"{'Vídeo' if tipo == 'video' else 'Foto'}: {autor} / Pixabay",
                "licenca": "pixabay", "autor": autor, "fonte": "pixabay", "pagina": pagina}

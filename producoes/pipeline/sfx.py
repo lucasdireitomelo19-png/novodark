@@ -91,6 +91,17 @@ def trovao(d=6.0):
 def glitch(d=0.3):
     t = t_(d); sq = signal.square(2 * np.pi * rng.choice([180, 240, 320]) * t) * 0.3
     return (sq + passa(ruido(d), 5000, "high") * 0.6) * ((np.sin(2 * np.pi * 23 * t) > -0.2).astype(float)) * env(d, 0.002, 0.05, 1)
+def vento(d=20.0):
+    """Vento seco do sertão: ruído filtrado com rajadas lentas. Ambiente em loop."""
+    t = t_(d); raj = 0.55 + 0.45 * np.sin(2 * np.pi * 0.11 * t) * np.sin(2 * np.pi * 0.037 * t + 1)
+    x = varredura(ruido(d), 180, 1400, q=0.6) * raj + passa(ruido(d), 120) * 0.4
+    cf = int(SR * 1.5); x[:cf] *= np.linspace(0, 1, cf); x[-cf:] *= np.linspace(1, 0, cf)
+    return x
+def agua(d=12.0):
+    """Água parada batendo de leve: ruído grave com ondas lentas."""
+    t = t_(d); x = passa(ruido(d), 600) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.4 * t) ** 2) + passa(ruido(d), 2500, "high") * 0.08
+    cf = int(SR * 1.0); x[:cf] *= np.linspace(0, 1, cf); x[-cf:] *= np.linspace(1, 0, cf)
+    return x
 def drone(d=60.0, raiz=55.0, escuro=True):
     """Trilha de fundo: acorde menor grave com batimento lento e vento filtrado. Feita para tocar em loop."""
     t = t_(d); x = np.zeros_like(t)
@@ -109,5 +120,6 @@ if __name__ == "__main__":
     salvar("datilografia", datilografia()); salvar("carimbo", carimbo()); salvar("ping", ping())
     salvar("estatica", estatica()); salvar("obturador", obturador()); salvar("glitch", glitch())
     salvar("chuva", chuva(), 0.5); salvar("fogo", fogo(), 0.5); salvar("trovao", trovao())
+    salvar("vento", vento(), 0.5); salvar("agua", agua(), 0.5)
     salvar("drone", drone(), 0.6); salvar("drone_tenso", drone(60.0, 46.25), 0.6)
     print("ok:", sorted(os.listdir(OUT)))
