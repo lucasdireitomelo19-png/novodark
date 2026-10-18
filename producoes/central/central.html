@@ -1,0 +1,325 @@
+<title>Central dos Canais</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mesa de produção — filtros no topo, fila de vídeos em lista, ficha do vídeo em painel lateral (tela cheia no celular) */
+:root {
+  --bg: #f3f2ef; --surface: #ffffff; --surface-2: #ebe9e4; --line: #d9d6cf; --fg: #1b1a18; --muted: #6b675f;
+  --lado: #d4600f; --inq: #c41d22; --ok: #2f7d4f; --warn: #a86a00; --info: #2f5f9e; --focus: #1b1a18;
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111012; --surface: #1a191c; --surface-2: #232126; --line: #2f2c33; --fg: #ecebe8; --muted: #9a958f;
+  --lado: #ff8a3a; --inq: #ff4d4f; --ok: #4fbf7d; --warn: #e0a83a; --info: #6aa2ea; --focus: #ecebe8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111012; --surface: #1a191c; --surface-2: #232126; --line: #2f2c33; --fg: #ecebe8; --muted: #9a958f;
+  --lado: #ff8a3a; --inq: #ff4d4f; --ok: #4fbf7d; --warn: #e0a83a; --info: #6aa2ea; --focus: #ecebe8; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 64px; }
+header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 4vw, 34px); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 8px 14px; font-weight: 600; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.small { padding: 5px 10px; font-size: 13px; }
+
+/* canais */
+.canais { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.canal { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 6px; position: relative; overflow: hidden; }
+.canal::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--c, var(--fg)); }
+.canal[aria-pressed="true"] { border-color: var(--c, var(--fg)); box-shadow: 0 0 0 1px var(--c, var(--fg)) inset; }
+.canal .nome { font-family: var(--f-display); font-weight: 700; font-size: 17px; }
+.canal .num { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.canal .num b { color: var(--fg); font-weight: 600; }
+
+/* filtros */
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.filtros select, .filtros input { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 7px 10px; min-width: 0; }
+.filtros input { flex: 1 1 200px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 7px 12px; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+
+/* lista */
+.lista { display: grid; gap: 8px; }
+.item { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; text-align: left; width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 10px 14px 10px 10px; }
+.item:hover { border-color: var(--muted); }
+.item .tb { width: 56px; height: 56px; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center; font-family: var(--f-display); font-weight: 800; font-size: 14px; color: var(--c); border: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.item .tit { font-weight: 600; min-width: 0; }
+.item .tit span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 12.5px; color: var(--muted); margin-top: 3px; align-items: center; }
+.item .dir { display: grid; justify-items: end; gap: 6px; }
+.pill { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 600; border: 1px solid currentColor; white-space: nowrap; }
+.st-Roteiro { color: var(--muted) } .st-Em-producao { color: var(--info) } .st-Revisar { color: var(--warn) }
+.st-Pronto { color: var(--ok) } .st-Agendado { color: var(--info) } .st-Publicado { color: var(--fg) }
+.plats { display: flex; gap: 4px; }
+.plat { font-family: var(--f-mono); font-size: 11px; padding: 1px 5px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); }
+.plat.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.tag { font-family: var(--f-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; }
+.vazio { border: 1px dashed var(--line); border-radius: var(--r); padding: 28px; text-align: center; color: var(--muted); }
+
+/* painel */
+.fundo { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 20; }
+.painel { position: fixed; top: 0; right: 0; bottom: 0; width: min(640px, 100%); background: var(--bg); border-left: 1px solid var(--line); z-index: 21; overflow-y: auto;
+  padding: calc(16px + env(safe-area-inset-top, 0px)) max(18px, env(safe-area-inset-right, 0px)) calc(32px + env(safe-area-inset-bottom, 0px)) 18px; display: grid; gap: 18px; align-content: start; }
+.painel h2 { font-family: var(--f-display); font-size: 22px; margin: 0; text-wrap: balance; }
+.cab { display: flex; gap: 12px; justify-content: space-between; align-items: start; }
+.video { width: 100%; max-height: 60vh; background: #000; border-radius: var(--r); }
+.sem-video { border: 1px dashed var(--line); border-radius: var(--r); padding: 18px; color: var(--muted); font-size: 14px; display: grid; gap: 10px; }
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+label.campo { display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+label.campo input, label.campo select, label.campo textarea { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 8px 10px; color: var(--fg); width: 100%; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.checks label { display: inline-flex; gap: 6px; align-items: center; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 10px; font-size: 14px; }
+.leg { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); overflow: hidden; }
+.leg .h { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.leg .h b { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+.leg .h small { color: var(--muted); font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.leg textarea { display: block; width: 100%; border: 0; background: transparent; color: var(--fg); padding: 10px 12px; font-family: var(--f-mono); font-size: 13px; line-height: 1.55; resize: vertical; min-height: 64px; }
+.leg.vazia textarea::placeholder { color: var(--muted); }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; position: sticky; bottom: calc(-32px - env(safe-area-inset-bottom, 0px)); background: var(--bg); padding-block: 12px; border-top: 1px solid var(--line); }
+.aviso { font-size: 13px; color: var(--muted); }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-weight: 600; z-index: 30; }
+@media (max-width: 560px) {
+  .item { grid-template-columns: 44px 1fr; } .item .tb { width: 44px; height: 44px; font-size: 12px; }
+  .item .dir { grid-column: 2; justify-items: start; grid-auto-flow: column; justify-content: start; }
+  .painel { border-left: 0; }
+}
+@media (prefers-reduced-motion: no-preference) { .painel { animation: entra .18s ease-out } @keyframes entra { from { transform: translateX(24px); opacity: .6 } } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Central dos Canais</h1>
+      <p class="sub">Vídeos, status e legendas prontas para copiar, dos dois canais.</p>
+    </div>
+    <button class="btn primary" id="novo" type="button">+ Novo vídeo</button>
+  </header>
+
+  <section class="canais" id="canais" aria-label="Canais"></section>
+
+  <div class="filtros">
+    <div class="seg" role="group" aria-label="Formato" id="segTipo">
+      <button type="button" data-v="" aria-pressed="true">Todos</button>
+      <button type="button" data-v="short" aria-pressed="false">Shorts</button>
+      <button type="button" data-v="longo" aria-pressed="false">Longos</button>
+    </div>
+    <select id="fStatus" aria-label="Status"><option value="">Todos os status</option></select>
+    <input id="fBusca" type="search" placeholder="Buscar por título ou legenda" aria-label="Buscar">
+  </div>
+
+  <div class="lista" id="lista"><div class="vazio" id="carregando">Carregando os vídeos…</div></div>
+</div>
+
+<div class="fundo" id="fundo" hidden></div>
+<aside class="painel" id="painel" hidden aria-label="Ficha do vídeo"></aside>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const CANAIS = {
+  lado: { nome: "Lado Sombrio do Universo", cor: "var(--lado)", sigla: "LS" },
+  inquerito: { nome: "Inquérito Sombrio", cor: "var(--inq)", sigla: "IS" },
+};
+const STATUS = ["Roteiro", "Em produção", "Revisar", "Pronto", "Agendado", "Publicado"];
+const LEGENDAS = [
+  ["yt_titulo", "YouTube · título", 100], ["yt_desc", "YouTube · descrição", 5000], ["tags", "YouTube · tags", 500],
+  ["tiktok", "TikTok", 2200], ["reels", "Instagram Reels", 2200], ["comentario", "Comentário fixado", 0],
+];
+const PLATS = [["yt", "YT"], ["tt", "TT"], ["ig", "IG"]];
+const st = { carregado: false, canal: "", tipo: "", status: "", busca: "", videos: [], aberto: null, db: null, assets: null, pode: true };
+try { const s = JSON.parse(localStorage.getItem("central-filtros") || "{}"); Object.assign(st, { canal: s.canal || "", tipo: s.tipo || "" }); } catch (e) {}
+const $ = id => document.getElementById(id);
+const classeStatus = s => "st-" + String(s || "").replace("Em produção", "Em-producao");
+function salvarFiltros() { try { localStorage.setItem("central-filtros", JSON.stringify({ canal: st.canal, tipo: st.tipo })); } catch (e) {} }
+function el(tag, attrs = {}, ...filhos) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) { if (k === "class") n.className = v; else if (k === "text") n.textContent = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else if (v !== null && v !== undefined && v !== false) n.setAttribute(k, v); }
+  for (const f of filhos) if (f) n.append(f);
+  return n;
+}
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 1800); }
+function dataBR(d) { if (!d) return ""; const [a, m, dd] = d.split("-"); return `${dd}/${m}/${a}`; }
+
+STATUS.forEach(s => $("fStatus").append(el("option", { value: s, text: s })));
+
+function renderCanais() {
+  const box = $("canais"); box.textContent = "";
+  const todos = [["", { nome: "Todos os canais", cor: "var(--fg)" }], ...Object.entries(CANAIS)];
+  for (const [id, c] of todos) {
+    const vs = st.videos.filter(v => !id || v.canal === id);
+    const cont = s => vs.filter(v => v.status === s).length;
+    const b = el("button", { class: "canal", type: "button", "aria-pressed": String(st.canal === id), style: `--c:${c.cor}`, onclick: () => { st.canal = id; salvarFiltros(); render(); } },
+      el("span", { class: "nome", text: c.nome }),
+      el("span", { class: "num" },
+        el("span", {}, el("b", { text: String(vs.length) }), " vídeos"),
+        el("span", {}, el("b", { text: String(cont("Pronto")) }), " prontos"),
+        el("span", {}, el("b", { text: String(cont("Revisar") + cont("Em produção")) }), " em andamento"),
+        el("span", {}, el("b", { text: String(cont("Publicado")) }), " publicados")));
+    box.append(b);
+  }
+}
+
+function filtrados() {
+  const q = st.busca.trim().toLowerCase();
+  return st.videos.filter(v => (!st.canal || v.canal === st.canal) && (!st.tipo || v.tipo === st.tipo) && (!st.status || v.status === st.status) &&
+    (!q || [v.nome, ...Object.values(v.legendas || {})].join(" ").toLowerCase().includes(q)))
+    .sort((a, b) => (a.canal > b.canal ? 1 : a.canal < b.canal ? -1 : 0) || (a.ordem || 0) - (b.ordem || 0));
+}
+
+function renderLista() {
+  const box = $("lista"); box.textContent = "";
+  const vs = filtrados();
+  if (!st.carregado) { box.append(el("div", { class: "vazio", text: "Carregando os vídeos dos dois canais…" })); return; }
+  if (!st.videos.length) { box.append(el("div", { class: "vazio", text: "Nenhum vídeo cadastrado ainda. Use “+ Novo vídeo” para adicionar o primeiro." })); return; }
+  if (!vs.length) { box.append(el("div", { class: "vazio", text: "Nenhum vídeo com esses filtros." })); return; }
+  for (const v of vs) {
+    const c = CANAIS[v.canal] || { cor: "var(--fg)", sigla: "?" };
+    const plats = el("span", { class: "plats", "aria-label": "Publicado em" }, ...PLATS.map(([k, n]) => el("span", { class: "plat" + (v.plataformas?.[k] ? " on" : ""), title: n, text: n })));
+    box.append(el("button", { class: "item", type: "button", style: `--c:${c.cor}`, onclick: () => abrir(v.id) },
+      el("span", { class: "tb", text: `${c.sigla}${String(v.ordem || "").padStart(2, "0")}` }),
+      el("span", { class: "tit" }, el("span", { text: v.nome || "Sem título" }),
+        el("span", { class: "meta" }, el("span", { class: "tag", text: v.tipo === "longo" ? "Longo" : "Short" }), el("span", { text: c.nome || "" }),
+          v.data_pub ? el("span", { text: "📅 " + dataBR(v.data_pub) + (v.hora ? " · " + v.hora : "") }) : null,
+          (v.video_url || v.video_link) ? el("span", { text: "▶ vídeo" }) : null)),
+      el("span", { class: "dir" }, el("span", { class: "pill " + classeStatus(v.status), text: v.status || "—" }), plats)));
+  }
+}
+
+function render() {
+  renderCanais();
+  for (const b of $("segTipo").querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.v === st.tipo));
+  $("fStatus").value = st.status;
+  renderLista();
+  if (st.aberto) renderPainel();
+}
+
+$("segTipo").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; st.tipo = b.dataset.v; salvarFiltros(); render(); });
+$("fStatus").addEventListener("change", e => { st.status = e.target.value; render(); });
+$("fBusca").addEventListener("input", e => { st.busca = e.target.value; renderLista(); });
+
+// ---------- ficha do vídeo ----------
+let rascunho = null;
+function abrir(id) { st.aberto = id; rascunho = structuredClone(st.videos.find(v => v.id === id) || {}); rascunho.legendas ||= {}; rascunho.plataformas ||= {}; $("fundo").hidden = false; $("painel").hidden = false; renderPainel(); }
+function fechar() { st.aberto = null; rascunho = null; $("fundo").hidden = true; $("painel").hidden = true; }
+$("fundo").addEventListener("click", fechar);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && st.aberto) fechar(); });
+
+async function copiar(txt, nome) {
+  try { await navigator.clipboard.writeText(txt); toast(nome + " copiado"); }
+  catch (e) { toast("Selecione o texto e copie (Ctrl+C)"); }
+}
+
+function renderPainel() {
+  const p = $("painel"); p.textContent = "";
+  const v = rascunho; if (!v) return;
+  const c = CANAIS[v.canal] || CANAIS.inquerito;
+  p.append(el("div", { class: "cab" },
+    el("div", {}, el("span", { class: "tag", style: `color:${c.cor}`, text: `${c.nome} · ${v.tipo === "longo" ? "Longo" : "Short"}` }), el("h2", { text: v.nome || "Novo vídeo" })),
+    el("button", { class: "btn small", type: "button", onclick: fechar, text: "Fechar" })));
+
+  // vídeo
+  const src = v.video_url || (v.video_asset ? "/_blob/" + v.video_asset : "");
+  if (src) p.append(el("video", { class: "video", src, controls: true, preload: "metadata", playsinline: true }));
+  const semVideo = el("div", { class: "sem-video" });
+  if (!src) semVideo.append(el("span", { text: v.tipo === "longo" ? "Vídeos longos passam do limite de 20 MB da página. Cole abaixo o link do arquivo (Drive, YouTube não listado etc.)." : "Ainda sem vídeo anexado." }));
+  if (v.video_link) semVideo.append(el("a", { href: v.video_link, target: "_blank", rel: "noopener", text: "Abrir arquivo do vídeo ↗" }));
+  if (st.assets) {
+    const inp = el("input", { type: "file", accept: "video/mp4,video/*", id: "upVideo", hidden: true });
+    inp.addEventListener("change", async () => {
+      const f = inp.files[0]; if (!f) return;
+      if (f.size > 20 * 1024 * 1024) { toast("Arquivo acima de 20 MB: comprima ou use um link"); return; }
+      toast("Enviando vídeo…");
+      try { const r = await st.assets.upload(f); v.video_asset = r.id; v.video_url = r.url; await salvar(true); toast("Vídeo anexado"); }
+      catch (e) { toast(e?.code === "too_large" ? "Arquivo grande demais (máx. 20 MB)" : "Não foi possível enviar o vídeo"); }
+    });
+    semVideo.append(inp, el("button", { class: "btn small", type: "button", onclick: () => inp.click(), text: src ? "Trocar vídeo (até 20 MB)" : "Anexar vídeo (até 20 MB)" }));
+  }
+  p.append(semVideo);
+
+  // dados
+  const campo = (rot, n) => el("label", { class: "campo" }, rot, n);
+  const selStatus = el("select", { id: "edStatus" }, ...STATUS.map(s => el("option", { value: s, text: s, selected: v.status === s })));
+  selStatus.addEventListener("change", () => v.status = selStatus.value);
+  const inData = el("input", { type: "date", id: "edData", value: v.data_pub || "" }); inData.addEventListener("change", () => v.data_pub = inData.value);
+  const inHora = el("input", { type: "time", id: "edHora", value: v.hora || "" }); inHora.addEventListener("change", () => v.hora = inHora.value);
+  const inNome = el("input", { type: "text", id: "edNome", value: v.nome || "" }); inNome.addEventListener("input", () => v.nome = inNome.value);
+  const selCanal = el("select", { id: "edCanal" }, ...Object.entries(CANAIS).map(([k, cc]) => el("option", { value: k, text: cc.nome, selected: v.canal === k })));
+  selCanal.addEventListener("change", () => v.canal = selCanal.value);
+  const selTipo = el("select", { id: "edTipo" }, el("option", { value: "short", text: "Short (vertical)", selected: v.tipo !== "longo" }), el("option", { value: "longo", text: "Longo (horizontal)", selected: v.tipo === "longo" }));
+  selTipo.addEventListener("change", () => v.tipo = selTipo.value);
+  const inLink = el("input", { type: "url", id: "edLink", value: v.video_link || "", placeholder: "https://…" }); inLink.addEventListener("input", () => v.video_link = inLink.value.trim());
+  p.append(el("div", { class: "grade" }, campo("Título interno", inNome), campo("Canal", selCanal), campo("Formato", selTipo), campo("Status", selStatus), campo("Data de publicação", inData), campo("Horário", inHora)));
+  p.append(campo("Link do arquivo do vídeo", inLink));
+  const checks = el("div", { class: "checks", role: "group", "aria-label": "Já publicado em" });
+  for (const [k, n] of [["yt", "YouTube"], ["tt", "TikTok"], ["ig", "Instagram"]]) {
+    const cb = el("input", { type: "checkbox", id: "pl_" + k, checked: !!v.plataformas[k] }); cb.addEventListener("change", () => v.plataformas[k] = cb.checked);
+    checks.append(el("label", {}, cb, "Publicado no " + n));
+  }
+  p.append(checks);
+
+  // legendas
+  for (const [k, rot, max] of LEGENDAS) {
+    const txt = v.legendas[k] || "";
+    const cont = el("small", { text: max ? `${txt.length}/${max}` : `${txt.length}` });
+    const ta = el("textarea", { id: "lg_" + k, rows: k === "yt_desc" || k === "reels" ? 8 : k === "yt_titulo" ? 2 : 4, placeholder: "Ainda não escrito" });
+    ta.value = txt;
+    ta.addEventListener("input", () => { v.legendas[k] = ta.value; cont.textContent = max ? `${ta.value.length}/${max}` : `${ta.value.length}`; cont.style.color = max && ta.value.length > max ? "var(--inq)" : ""; });
+    p.append(el("div", { class: "leg" + (txt ? "" : " vazia") },
+      el("div", { class: "h" }, el("b", { text: rot }), el("span", {}, cont, " ", el("button", { class: "btn small", type: "button", onclick: () => copiar(ta.value, rot), text: "Copiar" }))), ta));
+  }
+  const notas = el("textarea", { id: "edNotas", rows: 3, placeholder: "Ideias, correções, observações…" }); notas.value = v.notas || ""; notas.addEventListener("input", () => v.notas = notas.value);
+  p.append(campo("Notas", notas));
+
+  const apagar = el("button", { class: "btn small", type: "button", text: "Excluir vídeo" });
+  apagar.addEventListener("click", async () => {
+    if (apagar.dataset.conf !== "1") { apagar.dataset.conf = "1"; apagar.textContent = "Clique de novo para excluir"; return; }
+    try { await st.db.collection("videos").doc(v.id).delete(); fechar(); toast("Vídeo excluído"); } catch (e) { toast("Você não tem permissão para excluir"); }
+  });
+  p.append(el("div", { class: "acoes" }, v.id ? apagar : el("span"), el("span", { class: "aviso", id: "avisoSalvar" }),
+    el("button", { class: "btn primary", type: "button", onclick: () => salvar(false), text: "Salvar" })));
+}
+
+async function salvar(silencioso) {
+  const v = rascunho; if (!v || !st.db) { toast("Sem conexão com o banco de dados"); return; }
+  const dados = { canal: v.canal || "inquerito", tipo: v.tipo || "short", ordem: Number(v.ordem) || 0, nome: v.nome || "Sem título", status: v.status || "Roteiro",
+    data_pub: v.data_pub || "", hora: v.hora || "", plataformas: v.plataformas || {}, legendas: v.legendas || {}, notas: v.notas || "",
+    video_asset: v.video_asset || "", video_url: v.video_url || "", video_link: v.video_link || "", atualizado: new Date().toISOString() };
+  try {
+    if (v.id) await st.db.collection("videos").doc(v.id).set(dados);
+    else { const ref = await st.db.collection("videos").add(dados); v.id = ref.id; st.aberto = ref.id; }
+    if (!silencioso) toast("Salvo");
+  } catch (e) { toast("Não foi possível salvar: " + (e?.code === "not_granted" ? "sem permissão de edição" : "tente de novo")); }
+}
+
+$("novo").addEventListener("click", () => {
+  const canal = st.canal || "inquerito";
+  const ordem = Math.max(0, ...st.videos.filter(v => v.canal === canal && v.tipo === (st.tipo || "short")).map(v => v.ordem || 0)) + 1;
+  st.aberto = "__novo"; rascunho = { canal, tipo: st.tipo || "short", ordem, status: "Roteiro", legendas: {}, plataformas: {} };
+  $("fundo").hidden = false; $("painel").hidden = false; renderPainel();
+});
+
+// ---------- dados ----------
+(async () => {
+  const db = await claude.use("db");
+  if (!db) { $("lista").textContent = ""; $("lista").append(el("div", { class: "vazio", text: "Entre na sua conta do Claude para ver e editar os vídeos." })); $("novo").hidden = true; return; }
+  st.db = db;
+  db.collection("videos").onSnapshot(snap => {
+    st.videos = snap.docs.map(d => ({ id: d.id, ...d.data() })); st.carregado = true;
+    if (st.aberto && st.aberto !== "__novo" && !st.videos.some(v => v.id === st.aberto)) fechar();
+    renderCanais(); renderLista();
+  }, () => { $("lista").textContent = ""; $("lista").append(el("div", { class: "vazio", text: "Não foi possível carregar os vídeos agora. Recarregue a página." })); });
+  claude.use("assets").then(a => { st.assets = a; if (st.aberto) renderPainel(); });
+})();
+render();
+</script>
