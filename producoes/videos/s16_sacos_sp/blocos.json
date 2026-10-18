@@ -1,0 +1,9 @@
+[
+ {"id": "c01", "texto": "A internet diz que existe um serial killer em São Paulo. A polícia diz que não. E os corpos continuam aparecendo.", "pausa": 0.4, "vel": -3, "tom": -1},
+ {"id": "c02", "texto": "Entre o começo de setembro e a metade de outubro, pelo menos nove pessoas foram encontradas mortas na capital e na Grande São Paulo.", "pausa": 0.3},
+ {"id": "c03", "texto": "Quase sempre do mesmo jeito: amarradas, enroladas em sacos plásticos ou cobertores. Deixadas na rua, numa ciclovia, até numa represa.", "pausa": 0.4, "vel": -1},
+ {"id": "c04", "texto": "Nas redes, a teoria explodiu. Mas a Secretaria da Segurança diz que, até agora, não há indícios de que os crimes sejam da mesma pessoa. E que o saco, sozinho, não liga um caso ao outro.", "pausa": 0.4, "vel": 2},
+ {"id": "c05", "texto": "A principal linha da polícia é outra: o chamado tribunal do crime. Os julgamentos clandestinos do crime organizado.", "pausa": 0.45, "vel": -3, "tom": -1},
+ {"id": "c06", "texto": "Em um dos casos, a suspeita é de execução por vingança, depois de uma acusação de estupro.", "pausa": 0.4},
+ {"id": "c07", "texto": "Ninguém foi apontado como responsável por todas as mortes. E a pergunta continua: são crimes isolados... ou a mesma engrenagem?", "pausa": 0, "vel": -4, "tom": -1}
+]
