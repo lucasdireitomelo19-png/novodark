@@ -1,0 +1,151 @@
+<title>Inquérito Sombrio · Entregas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=Special+Elite&display=swap">
+<style>
+/* Layout: arquivo de casos — uma ficha por Short, vídeo vertical à esquerda, dados e ações à direita */
+:root {
+  --bg: #f3f1ee; --surface: #ffffff; --ink: #1c1a1d; --muted: #6a6470; --line: #dcd6d2;
+  --accent: #b3262d; --accent-ink: #ffffff; --stamp: #8a6d3b;
+  --display: "Archivo Narrow", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --typewriter: "Special Elite", "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121014; --surface: #1b181d; --ink: #ece7e4; --muted: #9b93a1; --line: #2e2a31;
+  --accent: #e0474f; --accent-ink: #ffffff; --stamp: #c9a76a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121014; --surface: #1b181d; --ink: #ece7e4; --muted: #9b93a1; --line: #2e2a31;
+  --accent: #e0474f; --accent-ink: #ffffff; --stamp: #c9a76a; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: 6px; margin-bottom: 26px; }
+.eyebrow { font: 13px var(--typewriter); color: var(--stamp); letter-spacing: .06em; }
+h1 { font: 700 clamp(30px, 6vw, 44px)/1.05 var(--display); letter-spacing: .01em; text-transform: uppercase; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 62ch; margin: 4px 0 0; }
+.status { min-height: 1.4em; font-size: 13px; color: var(--muted); }
+.lista { display: grid; gap: 22px; }
+.ficha { display: grid; grid-template-columns: minmax(0, 230px) minmax(0, 1fr); gap: 22px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+.ficha video { width: 100%; aspect-ratio: 9 / 16; max-width: 100%; background: #000; border-radius: 4px; display: block; }
+.dados { display: grid; align-content: start; gap: 12px; min-width: 0; }
+.cod { font: 13px var(--typewriter); color: var(--stamp); }
+.ficha h2 { font: 700 26px/1.1 var(--display); margin: 0; text-wrap: balance; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.campo { display: grid; gap: 4px; min-width: 0; }
+.campo b { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.campo p { margin: 0; overflow-wrap: anywhere; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+button { font: 600 14px var(--body); border-radius: 4px; padding: 9px 14px; cursor: pointer;
+  border: 1px solid var(--line); background: transparent; color: var(--ink); }
+button.principal { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+button:hover { filter: brightness(1.08); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:disabled { opacity: .55; cursor: progress; }
+.capas { display: flex; gap: 8px; }
+.capas img { width: 64px; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); }
+.aviso { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; margin-top: 28px; max-width: 70ch; }
+@media (max-width: 620px) { .ficha { grid-template-columns: minmax(0, 1fr); } .ficha video { max-width: 320px; margin: 0 auto; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">ARQUIVO DE ENTREGAS · SHORTS 9:16</span>
+    <h1>Inquérito Sombrio</h1>
+    <p class="lede">Os Shorts prontos para publicar. Assista aqui, baixe o MP4 e a capa, e copie título e legenda para o upload.</p>
+    <p class="status" id="status" role="status"></p>
+  </header>
+  <main class="lista" id="lista"></main>
+  <p class="aviso">Narração com voz sintética: ao publicar, marque a opção de conteúdo alterado ou sintético se a plataforma pedir. Os arquivos aqui são versões de 15 a 20 MB (1080×1920, H.264); as versões em qualidade máxima ficam no projeto.</p>
+</div>
+
+<script>
+const VIDEOS = [
+  { cod: 'S14', data: 'Ingá (PB)', caso: 'Pedra do Ingá', duracao: '1:07', tamanho: '20,6 MB', arquivo: 's14_pedra_do_inga.mp4',
+    video: '/_blob/9fc2c1babafbd4c2d929acda974156d6', capas: ['/_blob/fd59230528ad599ba390e109e3b50598', '/_blob/dc4af3556fc967c800564ba554d6b86e'],
+    titulo: 'A pedra no Brasil mais antiga que as pirâmides',
+    legenda: 'No agreste da Paraíba, um paredão de pedra coberto de símbolos talhados há 5 a 7 mil anos. Calendário solar, constelações ou uma mensagem? Até hoje, ninguém traduziu. #pedradoinga #paraiba #arqueologia #misterio #itacoatiara #inqueritosombrio #shorts' },
+  { cod: 'S13', data: '16/01/1958', caso: 'Ilha da Trindade', duracao: '1:09', tamanho: '19,0 MB', arquivo: 's13_ilha_da_trindade.mp4',
+    video: '/_blob/082db4ba973997c134c7f0febc81cfc2', capas: ['/_blob/af3d66cea3bb249c27f5e787f5f7b4dd', '/_blob/15152c845cfecaf330ec6355ac95065a'],
+    titulo: 'As fotos de disco voador tiradas de um navio da Marinha',
+    legenda: '16 de janeiro de 1958. A bordo do navio Almirante Saldanha, perto da Ilha da Trindade, um fotógrafo faz seis fotos de um objeto oval sobre o pico da ilha. Décadas depois, um amigo diz que foi farsa. Em quem você acredita? #trindade #ovni #discovoador #marinha #misterio #inqueritosombrio #shorts' },
+  { cod: 'S12', data: '1925', caso: 'Percy Fawcett e a cidade Z', duracao: '1:07', tamanho: '19,0 MB', arquivo: 's12_percy_fawcett.mp4',
+    video: '/_blob/544ef90622ef30597b1be02c073979d9', capas: ['/_blob/a19f7b0ea064aae63db2eb91bd7d11bc', '/_blob/0085c8348a27a85ee64654799ce4da0a'],
+    titulo: 'Ele entrou na Amazônia atrás da cidade Z e sumiu',
+    legenda: '1925. O coronel Percy Fawcett entra no Mato Grosso com o filho e um amigo, atrás de uma cidade perdida que chamava de Z. A última carta diz: "Você não precisa temer nenhum fracasso." Nunca mais saíram. #fawcett #cidadeZ #amazonia #xingu #misterio #inqueritosombrio #shorts' },
+  { cod: 'S11', data: '19/05/1986', caso: 'Mach 15: o alvo do Mirage', duracao: '1:03', tamanho: '14,9 MB', arquivo: 's11_mach15.mp4',
+    video: '/_blob/55a555b899095fe2152e30f5d5bba88a', capas: ['/_blob/38e4f2756eb779947f3d1de173869fea', '/_blob/fb84d950947f9e4a38dfaae0b417c499'],
+    titulo: 'Um piloto da FAB perseguiu algo a 18 mil km/h',
+    legenda: '19 de maio de 1986. Um Mirage da FAB decola de Anápolis atrás de um alvo no radar. O alvo faz zigue-zague, acelera e some. Pelos cálculos do piloto: Mach 15. Parte 2 da Noite Oficial dos OVNIs. #ovni #fab #misterio #noiteoficialdosovnis #mach15 #inqueritosombrio #shorts' },
+  { cod: 'S10', data: '19/05/1986', caso: 'A escolta de 13 objetos', duracao: '1:07', tamanho: '17,0 MB', arquivo: 's10_escolta.mp4',
+    video: '/_blob/482476edee11f277b38c7fb69ebfa870', capas: ['/_blob/86a99e48aa617a6a04f5042924fa159e', '/_blob/7603c569e492ba6b809bee96c0229e50'],
+    titulo: '13 OVNIs atrás de um caça da FAB 🛸',
+    legenda: '19 de maio de 1986. Um caça F-5 da FAB sai para interceptar luzes no céu. Minutos depois, o radar mostra 13 objetos atrás dele. O que aconteceu na Noite Oficial dos OVNIs está nos documentos da Aeronáutica, hoje no Arquivo Nacional. #ovni #fab #misterio #noiteoficialdosovnis #inqueritosombrio #shorts' },
+];
+
+const lista = document.getElementById('lista'), statusEl = document.getElementById('status');
+let downloads = null;
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) { if (k === 'class') e.className = v; else if (k in e) e[k] = v; else e.setAttribute(k, v); }
+  for (const k of kids) e.append(k);
+  return e;
+}
+
+async function baixar(btn, url, nome) {
+  if (!downloads) { statusEl.textContent = 'Download indisponível nesta visualização. Abra o artefato no claude.ai.'; return; }
+  const rot = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando…';
+  try {
+    const r = await fetch(url); if (!r.ok) throw new Error('HTTP ' + r.status);
+    const blob = await r.blob();
+    btn.textContent = 'Confirme o download';
+    await downloads.save({ filename: nome, data: blob });
+    statusEl.textContent = nome + ' enviado para downloads.';
+  } catch (e) {
+    const c = e && e.code;
+    statusEl.textContent = c === 'declined' ? 'Download cancelado.' : c === 'rate_limited' ? 'Já há um download aguardando confirmação.' : 'Não foi possível baixar ' + nome + '. Tente de novo.';
+  } finally { btn.disabled = false; btn.textContent = rot; }
+}
+
+async function copiar(btn, texto) {
+  try { await navigator.clipboard.writeText(texto); btn.textContent = 'Copiado'; }
+  catch { statusEl.textContent = 'Não deu para copiar automaticamente: selecione o texto e copie.'; }
+  setTimeout(() => { btn.textContent = btn.dataset.rotulo; }, 1600);
+}
+
+function render() {
+  lista.replaceChildren();
+  if (!VIDEOS.length) { lista.append(el('p', { class: 'lede' }, 'Nenhum vídeo publicado ainda.')); return; }
+  for (const v of VIDEOS) {
+    const bVid = el('button', { class: 'principal', type: 'button' }, 'Baixar vídeo (MP4)');
+    bVid.addEventListener('click', () => baixar(bVid, v.video, v.arquivo));
+    const acoes = el('div', { class: 'acoes' }, bVid);
+    v.capas.forEach((c, i) => {
+      const b = el('button', { type: 'button' }, 'Baixar capa ' + 'AB'[i]);
+      b.addEventListener('click', () => baixar(b, c, v.arquivo.replace('.mp4', '_capa_' + 'ab'[i] + '.jpg')));
+      acoes.append(b);
+    });
+    const bTit = el('button', { type: 'button' }, 'Copiar título'); bTit.dataset.rotulo = 'Copiar título';
+    bTit.addEventListener('click', () => copiar(bTit, v.titulo));
+    const bLeg = el('button', { type: 'button' }, 'Copiar legenda'); bLeg.dataset.rotulo = 'Copiar legenda';
+    bLeg.addEventListener('click', () => copiar(bLeg, v.legenda));
+    acoes.append(bTit, bLeg);
+    const capas = el('div', { class: 'capas' }, ...v.capas.map((c, i) => el('img', { src: c, alt: 'Capa ' + 'AB'[i] + ' de ' + v.caso, loading: 'lazy' })));
+    lista.append(el('article', { class: 'ficha', id: v.cod.toLowerCase() },
+      el('video', { src: v.video, controls: true, preload: 'metadata', playsInline: true, poster: v.capas[0] }),
+      el('div', { class: 'dados' },
+        el('span', { class: 'cod' }, v.cod + ' · ' + v.data),
+        el('h2', {}, v.caso),
+        el('div', { class: 'meta' }, el('span', {}, v.duracao), el('span', {}, '1080×1920'), el('span', {}, v.tamanho)),
+        el('div', { class: 'campo' }, el('b', {}, 'Título recomendado'), el('p', {}, v.titulo)),
+        el('div', { class: 'campo' }, el('b', {}, 'Legenda'), el('p', {}, v.legenda)),
+        el('div', { class: 'campo' }, el('b', {}, 'Capas A/B'), capas),
+        acoes)));
+  }
+}
+render();
+claude.use('downloads').then(d => { downloads = d; if (!d) statusEl.textContent = 'Download indisponível nesta visualização. Abra o artefato no claude.ai.'; });
+</script>
