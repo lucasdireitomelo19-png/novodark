@@ -1,0 +1,11 @@
+[
+ {"id": "c01", "texto": "Essas marcas foram talhadas numa rocha da Paraíba há milhares de anos. E até hoje ninguém conseguiu dizer o que elas significam.", "pausa": 0.45, "vel": -4, "tom": -1},
+ {"id": "c02", "texto": "Esta é a Pedra do Ingá, no agreste paraibano. Um paredão de pedra com dezenas de metros, coberto de símbolos esculpidos na rocha.", "pausa": 0.35},
+ {"id": "c03", "texto": "Não dá para datar as gravuras diretamente. Mas, pelos sítios arqueológicos ao redor, pesquisadores estimam que elas tenham entre cinco e sete mil anos.", "pausa": 0.35},
+ {"id": "c04", "texto": "Mais antigas que as pirâmides do Egito.", "pausa": 0.6, "vel": -6, "tom": -1},
+ {"id": "c05", "texto": "E quem fez? Já disseram que foram navegadores fenícios. Já disseram que foram extraterrestres.", "pausa": 0.4, "vel": 2},
+ {"id": "c06", "texto": "Para os arqueólogos, a resposta é mais simples, e mais impressionante: povos que viviam aqui muito antes dos tupis e dos cariris.", "pausa": 0.4, "vel": -2},
+ {"id": "c07", "texto": "Há quem veja na pedra um calendário solar, com sombras marcando o nascer do sol ao longo do ano. Outros enxergam constelações, como Órion e as Plêiades.", "pausa": 0.4},
+ {"id": "c08", "texto": "Em mil novecentos e quarenta e quatro, a pedra virou patrimônio nacional. As teorias se multiplicaram. Mas a mensagem continua sem tradução.", "pausa": 0.45},
+ {"id": "c09", "texto": "E se essas marcas forem mesmo uma mensagem... para quem ela foi escrita?", "pausa": 0, "vel": -5, "tom": -1}
+]

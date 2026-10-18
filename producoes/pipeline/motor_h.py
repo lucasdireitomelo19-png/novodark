@@ -153,6 +153,8 @@ for i, c in enumerate(CENAS):
     out = os.path.join(TMP, f"parte_{i:03d}.mp4")
     partes.append(out)
     chave = json.dumps({k: v for k, v in c.items() if k not in ("texto", "tag", "credito")}, sort_keys=True) + f"{dur:.3f}"
+    if c.get("_arq") and os.path.exists(c["_arq"]):  # animação refeita (anim.html mudou) também refaz o plano
+        chave += f"|{os.path.getmtime(c['_arq']):.0f}"
     if os.path.exists(out) and os.path.exists(out + ".key") and open(out + ".key").read() == chave:
         continue
     anim = c["src"].startswith("anim:")

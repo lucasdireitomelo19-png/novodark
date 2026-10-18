@@ -1,0 +1,11 @@
+[
+ {"id": "c01", "texto": "Em mil novecentos e vinte e cinco, um explorador escreveu para a esposa: \"Você não precisa temer nenhum fracasso.\" Foi a última notícia que alguém teve dele.", "pausa": 0.45, "vel": -5, "tom": -1},
+ {"id": "c02", "texto": "O coronel britânico Percy Fawcett estava no Mato Grosso, atrás de uma cidade perdida no meio da floresta. Ele a chamava só de Z.", "pausa": 0.35, "vel": -1},
+ {"id": "c03", "texto": "Com ele, apenas o filho mais velho, Jack, e o melhor amigo do rapaz, Raleigh Rimell.", "pausa": 0.3},
+ {"id": "c04", "texto": "Num ponto que ele chamou de Acampamento do Cavalo Morto, Fawcett mandou os guias de volta. E os três seguiram sozinhos, rumo ao Xingu.", "pausa": 0.4, "vel": 2},
+ {"id": "c05", "texto": "Nunca mais saíram.", "pausa": 0.7, "vel": -8, "tom": -2},
+ {"id": "c06", "texto": "Expedições foram atrás deles. Décadas depois, apareceu um anel com o brasão da família. Ossos atribuídos a Fawcett foram analisados... e não eram dele.", "pausa": 0.4, "vel": 3},
+ {"id": "c07", "texto": "Os Kalapalo contam que os três seguiram para o leste. E que, depois de cinco dias, as fogueiras deles pararam de aparecer.", "pausa": 0.5, "vel": -3},
+ {"id": "c08", "texto": "E a cidade Z? Pesquisas no Alto Xingu encontraram vestígios de aldeias enormes, ligadas por estradas, onde podem ter vivido dezenas de milhares de pessoas.", "pausa": 0.4},
+ {"id": "c09", "texto": "Talvez Fawcett estivesse mais perto do que imaginava. Só não voltou para contar.", "pausa": 0, "vel": -5, "tom": -1}
+]

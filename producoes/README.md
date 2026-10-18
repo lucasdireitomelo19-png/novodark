@@ -12,6 +12,10 @@ O pipeline foi adaptado do canal *Lado Sombrio do Universo* (repo `edittest`): m
 | 02 | Operação Prato (Colares, 1977) | [02_operacao_prato.md](02_operacao_prato.md) | `operacao_prato_10min.mp4` |
 | S1–S9 | Shorts de temas variados | [shorts_lote1.md](shorts_lote1.md) | `videos/s*/s*.mp4` |
 | S10 | A escolta de 13 objetos (FAB, 1986) | [videos/s10_escolta/roteiro.md](videos/s10_escolta/roteiro.md) | `videos/s10_escolta/s10_escolta.mp4` |
+| S11 | Mach 15: o alvo do Mirage (FAB, 1986) | [videos/s11_mach15/roteiro.md](videos/s11_mach15/roteiro.md) | `videos/s11_mach15/s11_mach15.mp4` |
+| S12 | Percy Fawcett e a cidade Z (1925) | [videos/s12_fawcett/roteiro.md](videos/s12_fawcett/roteiro.md) | `videos/s12_fawcett/s12_fawcett.mp4` |
+| S13 | Ilha da Trindade: as fotos de 1958 | [videos/s13_trindade/roteiro.md](videos/s13_trindade/roteiro.md) | `videos/s13_trindade/s13_trindade.mp4` |
+| S14 | Pedra do Ingá (PB) | [videos/s14_inga/roteiro.md](videos/s14_inga/roteiro.md) | `videos/s14_inga/s14_inga.mp4` |
 
 Os MP4 não ficam no git (são grandes). Eles são regerados pelo processo abaixo.
 
@@ -66,7 +70,7 @@ WORKERS=4 ../../.venv/bin/python motor_h.py ../videos/s10_escolta
 NODE_PATH=$(npm root -g) node anim/capa_short.js ../videos/s10_escolta
 ```
 
-Novidades do motor: opção `noite=1` (footage de dia vira noite), legenda quebra no fim de frase. Novas cenas: `escolta` (radar de bordo com contatos atrás do caça) e `luz` (luz vermelha vista da cabine, `apaga`).
+Novidades do motor: opção `noite=1` (footage de dia vira noite), legenda quebra no fim de frase. Novas cenas: `escolta`, `luz`, `alvo` (radar do Mirage), `velocidade` (contador/barras), `rota` (Rio–SP), `fogueiras`, `foto_disco` (foto P&B recriada), `itacoatiara` (rocha gravada, `luz`/`sol`/`ceu`); `bilhete` aceita `linhas` e `pronto`. O cache dos planos agora percebe animação refeita; ainda assim, ao mudar `anim.html`, apague `videos/<video>/tmp/anim_*`.
 
 O cache de animações (`videos/*/tmp`) usa os parâmetros da cena como chave. Se você mudar o desenho em `anim.html`, apague a pasta `tmp` do vídeo antes de renderizar de novo.
 

@@ -1,0 +1,56 @@
+[
+ {
+  "id": "c01",
+  "texto": "Em mil novecentos e cinquenta e oito, um fotógrafo a bordo de um navio da Marinha apontou a câmera para o céu. O que apareceu nas fotos divide o Brasil até hoje.",
+  "pausa": 0.45,
+  "vel": -4,
+  "tom": -1
+ },
+ {
+  "id": "c02",
+  "texto": "Dezesseis de janeiro, pouco depois do meio-dia. O navio Almirante Saldanha está perto da Ilha da Trindade, a mais de mil quilômetros da costa, numa missão científica.",
+  "pausa": 0.35
+ },
+ {
+  "id": "c03",
+  "texto": "Marinheiros apontam para o alto. O fotógrafo civil Almiro Baraúna pega a sua Rolleiflex. Segundo ele, foram seis fotos em catorze segundos.",
+  "pausa": 0.35,
+  "vel": 3
+ },
+ {
+  "id": "c04",
+  "texto": "Nelas, aparece um objeto oval, com um anel no meio, passando sobre o pico da ilha.",
+  "pausa": 0.5,
+  "vel": -3
+ },
+ {
+  "id": "c05",
+  "texto": "Em fevereiro, as fotos estão nos jornais. E o ministro da Marinha chega a falar num segredo que não pode ser divulgado, porque não pode ser explicado.",
+  "pausa": 0.45
+ },
+ {
+  "id": "c06",
+  "texto": "Mas existe o outro lado. Baraúna tinha experiência com montagens fotográficas. Anos antes, tinha ajudado a desmontar uma foto falsa de disco voador.",
+  "pausa": 0.35,
+  "vel": 2
+ },
+ {
+  "id": "c07",
+  "texto": "Em dois mil e dez, um amigo dele afirmou na TV que tudo tinha sido uma farsa. Baraúna morreu sem nunca confirmar isso.",
+  "pausa": 0.45
+ },
+ {
+  "id": "c08",
+  "texto": "Dezenas de testemunhas no convés. Uma câmera. Duas versões.",
+  "pausa": 0.45,
+  "vel": -6,
+  "tom": -1
+ },
+ {
+  "id": "c09",
+  "texto": "Em quem você acredita: nas fotos, ou no amigo?",
+  "pausa": 0,
+  "vel": -5,
+  "tom": -1
+ }
+]
