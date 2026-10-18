@@ -368,11 +368,12 @@ run(["ffmpeg", "-v", "error", "-y", "-i", bruto, "-i", os.path.join(pasta, "narr
      "[1:a]aresample=48000,highpass=f=75,equalizer=f=170:t=q:w=1:g=2.5,equalizer=f=3200:t=q:w=1.4:g=2,"
      "acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120:makeup=2,"
      "aecho=0.9:0.6:35|60:0.10|0.06,aformat=channel_layouts=stereo,"
-     f"apad,atrim=0:{FIM},loudnorm=I=-16:TP=-2:LRA=11[voz];"
+     # loudnorm segura ~3 s de análise e não devolve o fim do áudio: por isso a voz e a mixagem
+     # entram com 5 s de silêncio a mais e são cortadas no tamanho certo depois
+     f"apad,atrim=0:{FIM + 5},loudnorm=I=-16:TP=-2:LRA=11,aresample=48000,atrim=0:{FIM}[voz];"
      "[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.5[bg];"
-     "[voz][bg]amix=inputs=2:normalize=0:duration=first,"
-     # apad antes do loudnorm: sem ele, o loudnorm engole os últimos ~3 s (a janela de análise) e corta o fim da fala
-     f"apad=pad_dur=4,loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=disabled,atrim=0:{FIM}[a];"
+     "[voz][bg]amix=inputs=2:normalize=0:duration=longest,"
+     f"apad=pad_dur=5,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.84:level=disabled,atrim=0:{FIM}[a];"
      f"[0:v]vignette=angle=0.5,noise=alls=4:allf=t,ass={ass_path}:fontsdir={FONTS},"
      + ("" if VERT else "fade=t=in:d=0.4,") + f"fade=t=out:st={FIM - 1.0}:d=1.0,trim=0:{FIM}[v]",
      "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
